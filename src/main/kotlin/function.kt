@@ -64,18 +64,16 @@ fun inicio(){
 }
 
 fun isAdmind(email: String, password: String): Boolean {
-    val administrators: Map<String, String> = mapOf( "admin1@gmail.com" to "admin123", "admin2@gmail.com" to "admin1234")
-    for((i,j) in administrators){
-        if(i == email && j == password){
+    for(i in 0..99){
+        if(listUsr[i]?.getTipoCuenta() == "admin" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
             return true
         }
     }
     return false
 }
 fun isUser(email: String, password: String): Boolean {
-    val users: Map<String, String> = mapOf( "user1@gmail.com" to "12345678", "user2@gmail.com" to "123")
-    for((i,j) in users){
-        if(i == email && j == password){
+    for(i in 0..99){
+        if(listUsr[i]?.getTipoCuenta() == "user" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
             return true
         }
     }
@@ -116,16 +114,16 @@ fun createDBAdmins(){
     //Crea una lista con 4 administradores que están predeterminados
 
     listUsr[countUsers]=User(countUsers+1,"Erick","ErickBedu",
-        "123erick","erick@gmail.com","admin")
+        "1234erick","erick@gmail.com","admin")
     countUsers++
     listUsr[countUsers]=User(countUsers+1,"Yess","YessBedu",
-        "123yess","yess@gmail.com","admin")
+        "1234yess","yess@gmail.com","admin")
     countUsers++
     listUsr[countUsers]=User(countUsers+1,"Janner","JannerBedu",
-        "123janner","janner@gmail.com","admin")
+        "1234janner","janner@gmail.com","user")
     countUsers++
     listUsr[countUsers]=User(countUsers+1,"Genaro","GenaroBedu",
-        "123genaro","genaro@gmail.com","admin")
+        "1234genaro","genaro@gmail.com","user")
     countUsers++
 }
 

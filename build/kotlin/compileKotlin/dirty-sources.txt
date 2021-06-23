@@ -1,0 +1,3 @@
+C:\Users\erick\IdeaProjects\proyectBeduKotlin\src\main\kotlin\function.kt
+C:\Users\erick\IdeaProjects\proyectBeduKotlin\src\main\kotlin\main.kt
+C:\Users\erick\IdeaProjects\proyectBeduKotlin\src\main\kotlin\objects.kt

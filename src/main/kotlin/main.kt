@@ -1,4 +1,4 @@
 fun main(args: Array<String>) {
-    //rama genaro
+    //rama genaroo
     inicio()
 }

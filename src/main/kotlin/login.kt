@@ -1,3 +1,7 @@
+import models.User
+import models.countUsers
+import models.listUsr
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////// Aquí van las funciones ////////////////////////////////////////////////
 
@@ -113,7 +117,7 @@ fun createDBAdmins(){
 
     //Crea una lista con 4 administradores que están predeterminados
 
-    listUsr[countUsers]=User(countUsers+1,"Erick","ErickBedu",
+    listUsr[countUsers]= User(countUsers+1,"Erick","ErickBedu",
         "1234erick","erick@gmail.com","admin")
     countUsers++
     listUsr[countUsers]=User(countUsers+1,"Yess","YessBedu",

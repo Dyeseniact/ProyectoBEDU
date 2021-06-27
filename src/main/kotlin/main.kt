@@ -1,11 +1,13 @@
-import models.Book
-import models.Magazine
-import models.countBook
-import models.listBook
+import models.User
 
 fun main(args: Array<String>) {
     //Este es mi rama, yo soy Erick
     //comentario en rama erick - genaro
-    inicio()
-    println(listBook[1]?.title)
+    createDBBooks()
+    listUsr[countUsers]= User(countUsers+1,"Genaro2","GenaroBedu2",
+        "1234genaro2","genaro@gmail.com2","user2")
+    listUsr[countUsers]?.let {
+        selectPreferredGenre(it)
+        recommendByGenerd(it)
+    }
 }

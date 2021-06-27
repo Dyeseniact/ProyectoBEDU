@@ -2,7 +2,6 @@ import models.Book
 import models.User
 import models.countBook
 import models.listBook
-import javax.swing.text.StyledEditorKit
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////// Aquí van las funciones ////////////////////////////////////////////////
@@ -17,7 +16,7 @@ fun inicio(){
     // Verifico si el usuario está registrado o no
     println("Eres usuario registatrado? (Y)es or (N)o")
     var isUser: String = readLine()!!
-    if(isUser == "Y"){
+    if(isUser == "Y" || isUser == "y"){
 
         // Voy a verificar si las credenciasles están correctas
 
@@ -54,13 +53,11 @@ fun inicio(){
 
 
         }
-    }else if (isUser == "N"){
+    }else if (isUser == "N" || isUser == "n"){
         println("¿Desea crear un usuario? (Y)es or (N)o)")
         var addUser: String = readLine()!!
-        if(addUser == "Y"){
-
+        if(isUser == "Y" || isUser == "y"){
             createUsr()
-
             // función menú Nuevo usuario
 
         }else{
@@ -157,26 +154,26 @@ fun createDBBooks(){
     listBook[countBook]= Book(countBook +1,"Qualityland","Marc-Uwe Kling","Ciencia Ficción",308.683,10,false,0)
     listBook[countBook]= Book(countBook +1,"Las estrellas son legión","Kameron Hurley","Ciencia Ficción",302.71,10,false,0)
     listBook[countBook]= Book(countBook +1,"Embassytown: La Ciudad Embajada de ","China Mieville:","Ciencia Ficción",296.737,10,true,0)
-    listBook[countBook]= Book(countBook +1,"Orgullo y Prejuicio","Jane Austen","romance",290.764,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Emma","Jane Austen","romance",284.791,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Sentido y Sensibilidad","Jane Austen","romance",278.818,10,false,0)
-    listBook[countBook]= Book(countBook +1,"La antigua magia","Lisa Kleypas","romance",272.845,10,true,0)
-    listBook[countBook]= Book(countBook +1,"Tuya a Medianoche","Lisa Kleypas","romance",266.872,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Tentación al Anochecer","Lisa Kleypas","romance",260.899,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Secretos de una noche de verano","Lisa Kleypas","romance",254.926,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Casarse con él","Lisa Kleypas","romance",248.953,10,true,0)
-    listBook[countBook]= Book(countBook +1,"Una tentación para el Duque","Lorraine Heath","romance",242.98,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Jane Eyre","Lorraine Heath","romance",237.007,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Autor anonimo","POEMA DE GILGAMESH","historia",231.034,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Autor anonimo","LIBRO DE JOB","historia",225.061,10,true,0)
-    listBook[countBook]= Book(countBook +1,"Autor anonimo","las mil y una noches","historia",219.088,10,false,0)
-    listBook[countBook]= Book(countBook +1,"Autor anonimo","Saga de njal","historia",213.115,10,false,0)
-    listBook[countBook]= Book(countBook +1," CHINUA ACHEBE","TODO SE DESMORONA","historia",207.142,10,true,0)
-    listBook[countBook]= Book(countBook +1,"HANS CHRISTIAN ANDERSEN","CUENTOS INFANTILES","historia",201.169,10,false,0)
-    listBook[countBook]= Book(countBook +1,"DANTE ALIGHIERI","DIVINA COMEDIA","historia",195.196,10,false,0)
-    listBook[countBook]= Book(countBook +1,"HONORÉ DE BALZAC","PAPÁ GORIOT","historia",189.223,10,false,0)
-    listBook[countBook]= Book(countBook +1,"SAMUEL BECKETT","MOLLOY","historia",183.25,10,true,0)
-    listBook[countBook]= Book(countBook +1,"GIOVANNI BOCCACCIO","Decameron","historia",177.277,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Orgullo y Prejuicio","Jane Austen","Romance",290.764,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Emma","Jane Austen","Romance",284.791,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Sentido y Sensibilidad","Jane Austen","Romance",278.818,10,false,0)
+    listBook[countBook]= Book(countBook +1,"La antigua magia","Lisa Kleypas","Romance",272.845,10,true,0)
+    listBook[countBook]= Book(countBook +1,"Tuya a Medianoche","Lisa Kleypas","Romance",266.872,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Tentación al Anochecer","Lisa Kleypas","Romance",260.899,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Secretos de una noche de verano","Lisa Kleypas","Romance",254.926,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Casarse con él","Lisa Kleypas","Romance",248.953,10,true,0)
+    listBook[countBook]= Book(countBook +1,"Una tentación para el Duque","Lorraine Heath","Romance",242.98,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Jane Eyre","Lorraine Heath","Romance",237.007,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Autor anonimo","POEMA DE GILGAMESH","Historia",231.034,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Autor anonimo","LIBRO DE JOB","Historia",225.061,10,true,0)
+    listBook[countBook]= Book(countBook +1,"Autor anonimo","las mil y una noches","Historia",219.088,10,false,0)
+    listBook[countBook]= Book(countBook +1,"Autor anonimo","Saga de njal","Historia",213.115,10,false,0)
+    listBook[countBook]= Book(countBook +1," CHINUA ACHEBE","TODO SE DESMORONA","Historia",207.142,10,true,0)
+    listBook[countBook]= Book(countBook +1,"HANS CHRISTIAN ANDERSEN","CUENTOS INFANTILES","Historia",201.169,10,false,0)
+    listBook[countBook]= Book(countBook +1,"DANTE ALIGHIERI","DIVINA COMEDIA","Historia",195.196,10,false,0)
+    listBook[countBook]= Book(countBook +1,"HONORÉ DE BALZAC","PAPÁ GORIOT","Historia",189.223,10,false,0)
+    listBook[countBook]= Book(countBook +1,"SAMUEL BECKETT","MOLLOY","Historia",183.25,10,true,0)
+    listBook[countBook]= Book(countBook +1,"GIOVANNI BOCCACCIO","Decameron","Historia",177.277,10,false,0)
 }
 
 fun createUsr(){
@@ -198,4 +195,46 @@ fun createUsr(){
 
     countUsers++
 }
+
+fun selectPreferredGenre(user: User){
+    val genre = mutableSetOf<String>()
+    val genreSelected = mutableSetOf<String>()
+    listBook.forEach {  it?.let { it1 -> genre.add(it1.genre) } }
+
+    do{
+        println("Catálogo de Géneros Literarios")
+        var i = 1; genre.forEach {  println("$i. $it"); i++ }
+        do {
+            print("Ingrese el número del género literio preferido o ingrese C para continuar: ")
+            val generInput = readLine()
+            var out= false
+            generInput?.forEach { if(!it.isLetter()) out = true; return@forEach }
+            if (out){
+                genreSelected.add(genre.elementAt(generInput?.toInt()!!-1))
+                println("   Has agregado ${genre.elementAt(generInput?.toInt()!!-1)}")
+            }
+        }while (out)
+
+        print("\nTus género seleccionados son ")
+        genreSelected.forEach { print(" $it, ")}
+        print("\nIngrese Y para continuar o cualquier tecla para agregar más géneros: "); val salir = readLine()!="Y"
+    }while(salir)
+    user.preferredGenre = genreSelected
+}
+
+fun recommendByGenerd(user: User){
+    val genresPreferd = user.preferredGenre
+    val bookByGenresPreferd = mutableListOf<Book>()
+    listBook.forEach { val book = it
+        genresPreferd.forEach { if (book?.genre == it) bookByGenresPreferd.add(book); return@forEach }
+    }
+
+    println()
+    println("Títulos que te podrían interesar.")
+    for( i in 0 until 5){
+        val libroAleatorio = bookByGenresPreferd[(0 until bookByGenresPreferd.size).random()]
+        println(" ${i+1}. ${libroAleatorio.title}, ${libroAleatorio.author} ")
+    }
+}
+
 

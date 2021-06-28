@@ -32,6 +32,8 @@ fun menuAdmin(){
 
 
 }
+//Funciones de Administrador
+
 fun viewBooks(){
     for(i in 0..39){
         println("${listBook[i]?.id} - ${listBook[i]?.title}" )

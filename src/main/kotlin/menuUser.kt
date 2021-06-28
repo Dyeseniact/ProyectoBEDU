@@ -41,6 +41,8 @@ fun menuUser(){
     }
 }
 
+//Funciones de Usuarios
+
 fun topFavoriteBook(){
     println("Los libros favoritos son:")
     for(i in 0..99){

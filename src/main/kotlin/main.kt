@@ -1,13 +1,16 @@
 import models.User
+import db.createDBBooks
+
+/* Si se quiere hacer una pruba con un usuario registrado usar las siguientes credenciales:
+    EMAIL: genaro@gmail.com
+    PASSWORD: 1234genaro
+    Si se quiere hacer una pruba con un Administrador registrado usar las siguientes credenciales:
+    EMAIL: yess@gmail.com
+    PASSWORD: 1234yess
+*/
 
 fun main(args: Array<String>) {
-    //Este es mi rama, yo soy Erick
-    //comentario en rama erick - genaro
-    createDBBooks()
-    listUsr[countUsers]= User(countUsers+1,"Genaro2","GenaroBedu2",
-        "1234genaro2","genaro@gmail.com2","user2")
-    listUsr[countUsers]?.let {
-        selectPreferredGenre(it)
-        recommendByGenerd(it)
-    }
+
+    start()
+
 }

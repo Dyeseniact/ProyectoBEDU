@@ -24,7 +24,8 @@ fun menuUser(){
             returnMenu()
         }
         "3" -> {
-            seachBookGenre()
+            //seachBookGenre()
+            recommendByGenerd(userLogin)
             returnMenu()
         }
         "4" -> {
@@ -101,5 +102,20 @@ fun returnMenu(){
         menuUser()
     }else{
         returnMenu()
+    }
+}
+
+fun recommendByGenerd(user: User){
+    val genresPreferd = user.preferredGenre
+    val bookByGenresPreferd = mutableListOf<Book>()
+    listBook.forEach { val book = it
+        genresPreferd.forEach { if (book?.genre == it) bookByGenresPreferd.add(book); return@forEach }
+    }
+
+    println()
+    println("Títulos que te podrían interesar.")
+    for( i in 0 until 5){
+        val libroAleatorio = bookByGenresPreferd[(0 until bookByGenresPreferd.size).random()]
+        println(" ${i+1}. ${libroAleatorio.title}, ${libroAleatorio.author} ")
     }
 }

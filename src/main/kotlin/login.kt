@@ -1,10 +1,12 @@
-import models.Book
 import models.User
 import models.listBook
 import db.createDBBooks
 import db.createDBAdmins
 import db.listUsr
 import db.countUsers
+import models.countBook
+
+lateinit var userLogin: User
 
 fun start(){
     //Creamos la base de datos de todos los administradores
@@ -61,9 +63,11 @@ fun start(){
 fun login(email: String, password: String): String{
     for(i in 0..99){
         if(listUsr[i]?.getTipoCuenta() == "admin" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
+            userLogin = listUsr[i]!!
             return "admin"
         }else{
             if(listUsr[i]?.getTipoCuenta() == "user" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
+                userLogin = listUsr[i]!!
                 return "user"
             }
         }
@@ -116,6 +120,10 @@ fun createUsr(){
 
     listUsr[countUsers]=User(countUsers+1,name,userName,password,email)
 
+    listUsr[countUsers]?.let { selectPreferredGenre(it) }
+
+    userLogin = listUsr[countUsers]!!
+
     countUsers++
 }
 
@@ -145,20 +153,7 @@ fun selectPreferredGenre(user: User){
     user.preferredGenre = genreSelected
 }
 
-fun recommendByGenerd(user: User){
-    val genresPreferd = user.preferredGenre
-    val bookByGenresPreferd = mutableListOf<Book>()
-    listBook.forEach { val book = it
-        genresPreferd.forEach { if (book?.genre == it) bookByGenresPreferd.add(book); return@forEach }
-    }
 
-    println()
-    println("Títulos que te podrían interesar.")
-    for( i in 0 until 5){
-        val libroAleatorio = bookByGenresPreferd[(0 until bookByGenresPreferd.size).random()]
-        println(" ${i+1}. ${libroAleatorio.title}, ${libroAleatorio.author} ")
-    }
-}
 
 
 

@@ -12,12 +12,12 @@ fun createDBAdmins(){
         "1234erick","erick@gmail.com","admin")
     countUsers++
     listUsr[countUsers]= User(countUsers+1,"Yess","YessBedu",
-        "1234yess","yess@gmail.com","admin")
+        "1234yess","yess@gmail.com","admin", mutableSetOf("Romance"))
     countUsers++
     listUsr[countUsers]= User(countUsers+1,"Janner","JannerBedu",
         "1234janner","janner@gmail.com","user")
     countUsers++
     listUsr[countUsers]= User(countUsers+1,"Genaro","GenaroBedu",
-        "1234genaro","genaro@gmail.com","user")
+        "1234genaro","genaro@gmail.com","user", mutableSetOf("Ciencia Ficción", "Terror"))
     countUsers++
 }

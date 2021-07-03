@@ -1,6 +1,7 @@
 import models.User
 import models.countUsers
 import models.listUsr
+import javax.swing.JOptionPane
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////// Aquí van las funciones ////////////////////////////////////////////////
@@ -10,18 +11,18 @@ fun inicio(){
     createDBAdmins()
 
     // Verifico si el usuario está registrado o no
-    println("Eres usuario registatrado? (Y)es or (N)o")
-    var isUser: String = readLine()!!
+    //println("Eres usuario registatrado? (Y)es or (N)o")
+    var isUser = JOptionPane.showInputDialog("Eres usuario registatrado? (Y)es or (N)o")
     if(isUser == "Y"){
 
         // Voy a verificar si las credenciasles están correctas
 
-        println("Por favor, Introduzca su nombre de usuario")
-        var email = readLine()!!
+        //println("Por favor, Introduzca su nombre de usuario")
+        var email = JOptionPane.showInputDialog("Por favor, Introduzca su nombre de usuario")
         email = verifyCorrectEmail(email)
 
-        println("Por favor, Introduzca su contraseña")
-        var password = readLine()!!
+        //println("Por favor, Introduzca su contraseña")
+        var password = JOptionPane.showInputDialog("Por favor, Introduzca su contraseña")
         password = verifyCorrectPassword(password)
 
         if ( isAdmind(email,password) == true) {
@@ -50,8 +51,8 @@ fun inicio(){
 
         }
     }else if (isUser == "N"){
-        println("¿Desea crear un usuario? (Y)es or (N)o)")
-        var addUser: String = readLine()!!
+        //println("¿Desea crear un usuario? (Y)es or (N)o)")
+        var addUser: String = JOptionPane.showInputDialog("¿Desea crear un usuario? (Y)es or (N)o)").toString()
         if(addUser == "Y"){
 
             createUsr()
@@ -92,8 +93,8 @@ fun verifyCorrectEmail(email:String): String {
             if (it == '@') { correctEmail = true }
         }
         if (!correctEmail) {
-            println("El correo no es correcto hace falta el @, ingresa nuevamente el correo.")
-            println("\nIngresa email nuevamente"); correo = readLine().toString()
+          correo = JOptionPane.showInputDialog("El correo no es correcto hace falta el @, ingresa nuevamente el correo. \n" +
+                    "Ingresa email nuevamente")
         }
     } while (!correctEmail)
     return correo
@@ -135,15 +136,16 @@ fun createUsr(){
 
     //Crea un usuario nuevo
 
-    print("Escriba su nombre: ")
-    val name= readLine().toString()
-    print("Escriba su nombre de usuario: ")
-    val userName = readLine().toString()
-    print("Escriba su contraseña: ")
-    val password = verifyCorrectPassword(readLine()!!)
-    print("Escriba su email: ")
-    val email = verifyCorrectEmail(readLine()!!)
-
+    //print("Escriba su nombre: ")
+    val name = JOptionPane.showInputDialog("Escriba su nombre: ").toString()
+    //print("Escriba su nombre de usuario: ")
+    val userName = JOptionPane.showInputDialog("Escriba su nombre de usuario: ").toString()
+    //print("Escriba su contraseña: ")
+    //val password = verifyCorrectPassword(readLine()!!)
+    val password = verifyCorrectPassword(JOptionPane.showInputDialog("Escriba su contraseña: "))
+    //print("Escriba su email: ")
+    //val email = verifyCorrectEmail(readLine()!!)
+    val email = verifyCorrectEmail(JOptionPane.showInputDialog("Escriba su email: "))
     println("Bienvenido, ahora eres parte de nuestra comunidad")
 
     listUsr[countUsers]=User(countUsers+1,name,userName,password,email)

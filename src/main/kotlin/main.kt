@@ -1,27 +1,18 @@
-import Class.Libro
-import Class.NumberIdStock
-import Functions.buscarLibro
-import Functions.cargaLibros
-import javax.swing.JOptionPane
+import models.User
+import db.createDBBooks
 
-fun main() {
+/*
+    NOTA:
+    Si se quiere hacer una prueba con un usuario registrado usar las siguientes credenciales:
+    EMAIL: genaro@gmail.com
+    PASSWORD: 1234genaro
+    Si se quiere hacer una pruba con un Administrador registrado usar las siguientes credenciales:
+    EMAIL: yess@gmail.com
+    PASSWORD: 1234yess
+*/
 
-   var newBooks = JOptionPane.showInputDialog("Introduzca el número de libros figticios que quieres cargar").toInt()
-   var Lib=Array<Libro?>(newBooks){null}
-   cargaLibros(newBooks)
-   println("El numero de libros cargados es ${Lib.size}")
-    println("El numero de libros cargados es ${Lib[2]?.autor}")
+fun main(args: Array<String>) {
 
+    start()
 
-
-println("El numero de libros cargados es ${Lib.size}")
-println("El numero de libros cargados es ${Lib[2]?.autor}")
-
-
-
-
-
-
-    //inicio()
-    buscarLibro()
 }

@@ -1,88 +1,78 @@
 import models.User
-import models.countUsers
-import models.listUsr
-import javax.swing.JOptionPane
+import models.listBook
+import db.createDBBooks
+import db.createDBAdmins
+import db.listUsr
+import db.countUsers
+import models.countBook
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////// Aquí van las funciones ////////////////////////////////////////////////
+lateinit var userLogin: User
 
-fun inicio(){
+fun start(){
     //Creamos la base de datos de todos los administradores
     createDBAdmins()
+    createDBBooks()
+
+    println("-------Bienvenido a nuestro sistema-------")
+    println("Eres usuario registatrado? (Y)es or (N)o")
+    var isUser: String = readLine()!!
 
     // Verifico si el usuario está registrado o no
-    //println("Eres usuario registatrado? (Y)es or (N)o")
-    var isUser = JOptionPane.showInputDialog("Eres usuario registatrado? (Y)es or (N)o")
-    if(isUser == "Y"){
+    if(isUser == "Y" || isUser == "y"){
 
         // Voy a verificar si las credenciasles están correctas
 
-        //println("Por favor, Introduzca su nombre de usuario")
-        var email = JOptionPane.showInputDialog("Por favor, Introduzca su nombre de usuario")
+        println("Por favor, Introduzca su correo")
+        var email = readLine()!!
         email = verifyCorrectEmail(email)
 
-        //println("Por favor, Introduzca su contraseña")
-        var password = JOptionPane.showInputDialog("Por favor, Introduzca su contraseña")
+        println("Por favor, Introduzca su contraseña")
+        var password = readLine()!!
         password = verifyCorrectPassword(password)
 
-        if ( isAdmind(email,password) == true) {
-            println("Estás loggeado, eres Administrador")
+        //Verifica que sea un usuario registrado
+        var loginAnswer = login(email,password)
 
-            // función menú
-
-
-
-
-        }else if(isUser(email,password) == true){
-            print("Estás loggeado, eres Usuario")
-
-            // función menú
-
-
-
-        }else {
-            println("No estas registrado")
-            println("Cree su usuario siguiendo las instrucciones:)")
-
-            createUsr()
-
-            // función menú Nuevo usuario
-
-
+        //Verifica si es un usuario o un administrador
+        when(loginAnswer){
+            "admin" -> menuAdmin()
+            "user" -> menuUser()
+            else -> {
+                println("No estas registrado")
+                println("Cree su usuario siguiendo las instrucciones:)")
+                createUsr()
+                menuUser()
+            }
         }
-    }else if (isUser == "N"){
-        //println("¿Desea crear un usuario? (Y)es or (N)o)")
-        var addUser: String = JOptionPane.showInputDialog("¿Desea crear un usuario? (Y)es or (N)o)").toString()
-        if(addUser == "Y"){
 
+    }else if (isUser == "N" || isUser == "n"){
+        println("¿Desea crear un usuario? (Y)es or (N)o)")
+        var addUser: String = readLine()!!
+        if(addUser == "Y" || addUser == "y"){
             createUsr()
-
-            // función menú Nuevo usuario
+            menuUser()
 
         }else{
-            println("¿Lamentamos su negativa")
+            println("Lamentamos su negativa")
         }
     }else {
         println("Error, comience y lea correctamente")
     }
 
 }
-
-fun isAdmind(email: String, password: String): Boolean {
+fun login(email: String, password: String): String{
     for(i in 0..99){
         if(listUsr[i]?.getTipoCuenta() == "admin" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
-            return true
+            userLogin = listUsr[i]!!
+            return "admin"
+        }else{
+            if(listUsr[i]?.getTipoCuenta() == "user" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
+                userLogin = listUsr[i]!!
+                return "user"
+            }
         }
     }
-    return false
-}
-fun isUser(email: String, password: String): Boolean {
-    for(i in 0..99){
-        if(listUsr[i]?.getTipoCuenta() == "user" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
-            return true
-        }
-    }
-    return false
+    return "isnRegister"
 }
 
 fun verifyCorrectEmail(email:String): String {
@@ -93,8 +83,8 @@ fun verifyCorrectEmail(email:String): String {
             if (it == '@') { correctEmail = true }
         }
         if (!correctEmail) {
-          correo = JOptionPane.showInputDialog("El correo no es correcto hace falta el @, ingresa nuevamente el correo. \n" +
-                    "Ingresa email nuevamente")
+            println("El correo no es correcto hace falta el @, ingresa nuevamente el correo.")
+            println("\nIngresa email nuevamente"); correo = readLine().toString()
         }
     } while (!correctEmail)
     return correo
@@ -113,43 +103,59 @@ fun verifyCorrectPassword(password:String):String{
     return pass
 }
 
-
-fun createDBAdmins(){
-
-    //Crea una lista con 4 administradores que están predeterminados
-
-    listUsr[countUsers]= User(countUsers+1,"Erick","ErickBedu",
-        "1234erick","erick@gmail.com","admin")
-    countUsers++
-    listUsr[countUsers]=User(countUsers+1,"Yess","YessBedu",
-        "1234yess","yess@gmail.com","admin")
-    countUsers++
-    listUsr[countUsers]=User(countUsers+1,"Janner","JannerBedu",
-        "1234janner","janner@gmail.com","user")
-    countUsers++
-    listUsr[countUsers]=User(countUsers+1,"Genaro","GenaroBedu",
-        "1234genaro","genaro@gmail.com","user")
-    countUsers++
-}
-
 fun createUsr(){
 
     //Crea un usuario nuevo
 
-    //print("Escriba su nombre: ")
-    val name = JOptionPane.showInputDialog("Escriba su nombre: ").toString()
-    //print("Escriba su nombre de usuario: ")
-    val userName = JOptionPane.showInputDialog("Escriba su nombre de usuario: ").toString()
-    //print("Escriba su contraseña: ")
-    //val password = verifyCorrectPassword(readLine()!!)
-    val password = verifyCorrectPassword(JOptionPane.showInputDialog("Escriba su contraseña: "))
-    //print("Escriba su email: ")
-    //val email = verifyCorrectEmail(readLine()!!)
-    val email = verifyCorrectEmail(JOptionPane.showInputDialog("Escriba su email: "))
+    print("Escriba su nombre: ")
+    val name= readLine().toString()
+    print("Escriba su nombre de usuario: ")
+    val userName = readLine().toString()
+    print("Escriba su contraseña: ")
+    val password = verifyCorrectPassword(readLine()!!)
+    print("Escriba su email: ")
+    val email = verifyCorrectEmail(readLine()!!)
+
     println("Bienvenido, ahora eres parte de nuestra comunidad")
 
     listUsr[countUsers]=User(countUsers+1,name,userName,password,email)
 
+    listUsr[countUsers]?.let { selectPreferredGenre(it) }
+
+    userLogin = listUsr[countUsers]!!
+
     countUsers++
 }
+
+fun selectPreferredGenre(user: User){
+    val genre = mutableSetOf<String>()
+    val genreSelected = mutableSetOf<String>()
+    listBook.forEach {  it?.let { it1 -> genre.add(it1.genre) } }
+
+    do{
+        println("Catálogo de Géneros Literarios")
+        var i = 1; genre.forEach {  println("$i. $it"); i++ }
+        do {
+            print("Ingrese el número del género literio preferido o ingrese C para continuar: ")
+            val generInput = readLine()
+            var out= false
+            generInput?.forEach { if(!it.isLetter()) out = true; return@forEach }
+            if (out){
+                genreSelected.add(genre.elementAt(generInput?.toInt()!!-1))
+                println("   Has agregado ${genre.elementAt(generInput?.toInt()!!-1)}")
+            }
+        }while (out)
+
+        print("\nTus género seleccionados son ")
+        genreSelected.forEach { print(" $it, ")}
+        print("\nIngrese Y para continuar o cualquier tecla para agregar más géneros: "); val salir = readLine()!="Y"
+    }while(salir)
+    user.preferredGenre = genreSelected
+}
+
+
+
+
+
+
 

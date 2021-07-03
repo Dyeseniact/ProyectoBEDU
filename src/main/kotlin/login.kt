@@ -1,10 +1,8 @@
+import db.*
 import models.User
 import models.listBook
-import db.createDBBooks
-import db.createDBAdmins
-import db.listUsr
-import db.countUsers
 import models.countBook
+import models.listMagazine
 
 lateinit var userLogin: User
 
@@ -12,6 +10,8 @@ fun start(){
     //Creamos la base de datos de todos los administradores
     createDBAdmins()
     createDBBooks()
+    createDBArticle()
+    createDBMagazine()
 
     println("-------Bienvenido a nuestro sistema-------")
     println("Eres usuario registatrado? (Y)es or (N)o")

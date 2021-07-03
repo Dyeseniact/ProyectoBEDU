@@ -1,19 +1,19 @@
 package models
 
-class Article(
-    override val id: Int,
-    override var title: String,
-    override var author: String,
-    override var genre: String,
-    override var price: Double,
-    override var stock: Int,
-    override var favorite: Boolean=false,
-    override var discount: Int=0,
-    private var namePublication: String="",
-    private var yearPublication: Int=0,
-    private var monthPublication:String=""
+data class Article(
+    public override val id: Int,
+    public override var title: String,
+    public override var author: String,
+    public override var genre: String,
+    public override var price: Double,
+    public override var stock: Int,
+    public override var favorite: Boolean=false,
+    public override var discount: Int=0,
+    var namePublication: String="",
+    var yearPublication: Int=0,
+    var monthPublication:String=""
 ):Product(){
-    fun namePublication():String=namePublication
-    fun yearPublication():Int=yearPublication
-    fun monthPublication():String=monthPublication
+    init {
+        countArticle++
+    }
 }

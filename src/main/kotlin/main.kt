@@ -1,5 +1,9 @@
 import models.User
 import db.createDBBooks
+import db.listUsr
+import models.listArticle
+import models.listBook
+import models.listMagazine
 
 /*
     NOTA:
@@ -14,5 +18,9 @@ import db.createDBBooks
 fun main(args: Array<String>) {
 
     start()
+    println(listUsr[1]!!.getName())
+            println(listBook[1]!!.title)
+            println(listMagazine[1]!!.title)
+            println(listArticle[1]!!.title)
 
 }

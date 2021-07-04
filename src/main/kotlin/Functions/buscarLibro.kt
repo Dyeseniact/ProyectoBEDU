@@ -2,13 +2,16 @@ package Functions
 
 import Class.Libro
 import Class.NumberIdStock
+import menuUser
+import models.listBook
+import returnMenu
 import javax.swing.JOptionPane
 
 // Listados de funciones
 
 
 
-fun buscarLibro(){
+fun searchBook(){
     /*println(" ¿Por qué método desea realizar la búsqueda? Diga una opción.")
     println("1. Buscar por Título")
     println("2. Buscar por autores")
@@ -31,7 +34,7 @@ fun buscarLibro(){
         }
         else -> {
             print("Por favor, seleccione un método de búsqueda correcto")
-            buscarLibro()
+            searchBook()
         }
     }
 }
@@ -43,6 +46,32 @@ fun buscarLibroTitulo(){
     //Mensaje de prueba
     println("Búscando el Título $busquedaTitulo")
     // Aún por desarrollar
+
+    for (i in 0 until listBook.size){
+        if(busquedaTitulo == listBook[i]!!.title){
+            JOptionPane.showInputDialog(null, " Ellibro está disponible")
+            JOptionPane.showInputDialog(null, "El libro está disponible")
+            var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
+                    "Seleccione una opción.\n " +
+                    "1. Buscar por Título\n" +
+                    "2. Buscar por autores\n" +
+                    "3. Buscar por género\n")
+            comprarLibro(buy)
+        }else {
+         var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
+                    "Seleccione una opción.\n " +
+                    "1. Volver al Menú\n" +
+                    "2. Realizar otra búsqueda\n")
+            if(salir == "1"){
+                menuUser()
+            }else{
+                searchBook()
+            }
+        }
+    }
+
+
+
 
     if(busquedaTitulo == "Test. Hacer un map.Lib.titulo"){
         JOptionPane.showInputDialog(null, "El libro está disponible")
@@ -79,7 +108,7 @@ fun buscarLibroAutor(){
         comprarLibro(buy)
     }else{
         JOptionPane.showInputDialog(null,"No ha encontrado el Título deseado")
-        buscarLibro()
+        searchBook()
     }
 
 // Aún por desarrollar

@@ -13,7 +13,7 @@ fun comprarLibro(opt: String){
         }
         else -> {
             print("Por favor, seleccione un método de búsqueda correcto")
-            buscarLibro()
+            searchBook()
         }
     }
 
@@ -27,6 +27,7 @@ fun comprarLibro(opt: String){
 
 fun comprar(){
 println("Proceda a pagar su compra")
+
 
     // Llamar la función carrito: Agregar al carrito, proceder al pago.
 }

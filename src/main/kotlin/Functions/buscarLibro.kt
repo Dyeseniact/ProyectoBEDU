@@ -49,13 +49,13 @@ fun buscarLibroTitulo(){
 
     for (i in 0 until listBook.size){
         if(busquedaTitulo == listBook[i]!!.title){
-            JOptionPane.showInputDialog(null, " Ellibro está disponible")
+
             JOptionPane.showInputDialog(null, "El libro está disponible")
             var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
                     "Seleccione una opción.\n " +
-                    "1. Buscar por Título\n" +
-                    "2. Buscar por autores\n" +
-                    "3. Buscar por género\n")
+                    "1. Comprar en físico\n" +
+                    "2. Rentar \n" +
+                    "3. Lectura Online\n")
             comprarLibro(buy)
         }else {
          var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
@@ -64,23 +64,13 @@ fun buscarLibroTitulo(){
                     "2. Realizar otra búsqueda\n")
             if(salir == "1"){
                 menuUser()
-            }else{
+            }else if(salir == "2") {
                 searchBook()
+            }else{
+                println("Introdujo opción erronéa, esté más atento")
+                returnMenu()
             }
         }
-    }
-
-
-
-
-    if(busquedaTitulo == "Test. Hacer un map.Lib.titulo"){
-        JOptionPane.showInputDialog(null, "El libro está disponible")
-        var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
-                "Seleccione una opción.\n " +
-                "1. Buscar por Título\n" +
-                "2. Buscar por autores\n" +
-                "3. Buscar por género\n")
-        comprarLibro(buy)
     }
 
 
@@ -97,19 +87,32 @@ fun buscarLibroAutor(){
     //Mensaje de prueba
     println("Búscando el Título $busquedaAutor")
 
-    if(busquedaAutor == "Test"){
-        //print("El libro está disponible")
-        JOptionPane.showInputDialog(null, "El libro está disponible")
-        var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
-                "Seleccione una opción.\n " +
-                "1. Buscar por Título\n" +
-                "2. Buscar por autores\n" +
-                "3. Buscar por género\n")
-        comprarLibro(buy)
-    }else{
-        JOptionPane.showInputDialog(null,"No ha encontrado el Título deseado")
-        searchBook()
+    for (i in 0 until listBook.size){
+        if(busquedaAutor == listBook[i]!!.author){
+
+            JOptionPane.showInputDialog(null, "El libro está disponible")
+            var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
+                    "Seleccione una opción.\n " +
+                    "1. Comprar en físico\n" +
+                    "2. Rentar \n" +
+                    "3. Lectura Online\n")
+            comprarLibro(buy)
+        }else {
+            var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
+                    "Seleccione una opción.\n " +
+                    "1. Volver al Menú\n" +
+                    "2. Realizar otra búsqueda\n")
+            if(salir == "1"){
+                menuUser()
+            }else if(salir == "2") {
+                searchBook()
+            }else{
+                println("Introdujo opción erronéa, esté más atento")
+                returnMenu()
+            }
+        }
     }
+
 
 // Aún por desarrollar
 }
@@ -119,5 +122,32 @@ fun buscarLibroGenero(){
     var busquedaGenero: String = JOptionPane.showInputDialog("Introduce el género deseado:")
     //Mensaje de prueba
     println("Búscando el Título $busquedaGenero")
+
+    for (i in 0 until listBook.size){
+        if(busquedaGenero == listBook[i]!!.genre){
+
+            JOptionPane.showInputDialog(null, "El libro está disponible")
+            var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
+                    "Seleccione una opción.\n " +
+                    "1. Comprar en físico\n" +
+                    "2. Rentar \n" +
+                    "3. Lectura Online\n")
+            comprarLibro(buy)
+        }else {
+            var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
+                    "Seleccione una opción.\n " +
+                    "1. Volver al Menú\n" +
+                    "2. Realizar otra búsqueda\n")
+            if(salir == "1"){
+                menuUser()
+            }else if(salir == "2") {
+                searchBook()
+            }else{
+                println("Introdujo opción erronéa, esté más atento")
+                returnMenu()
+            }
+        }
+    }
+
 
 }

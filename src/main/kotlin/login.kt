@@ -1,18 +1,19 @@
 import db.*
-import models.User
-import models.listBook
-import models.countBook
-import models.listMagazine
+import models.*
+import javax.swing.JOptionPane
 
 lateinit var userLogin: User
 
-fun start(){
+fun createDB(){
     //Creamos la base de datos de todos los administradores
     createDBAdmins()
     createDBBooks()
     createDBArticle()
     createDBMagazine()
 
+}
+
+fun start(){
     println("-------Bienvenido a nuestro sistema-------")
     println("Eres usuario registatrado? (Y)es or (N)o")
     var isUser: String = readLine()!!
@@ -127,32 +128,188 @@ fun createUsr(){
     countUsers++
 }
 
-fun selectPreferredGenre(user: User){
-    val genre = mutableSetOf<String>()
-    val genreSelected = mutableSetOf<String>()
-    listBook.forEach {  it?.let { it1 -> genre.add(it1.genre) } }
+fun selectPreferredGenre(user: User?=null){
+    val genres = fun(books : Array<Book?>?, magazines: Array<Magazine?>?, articles :Array<Article?>? ) : MutableSet<String> {
+        val genre = mutableSetOf<String>()
+        books?.map { it?.let { it1 -> genre.add(it1.genre) } }
+        magazines?.map { it?.let { it1 -> genre.add(it1.genre) } }
+        articles?.map { it?.let { it1 -> genre.add(it1.genre) } }
+        return genre
+    }
+
+    val allGenres = arrayListOf( genres(listBook,null,null),genres(null, listMagazine,null),genres(null,null, listArticle) )
+
+    var genreSelected = arrayListOf<MutableSet<String>>()
+    genreSelected.add(mutableSetOf())
+    genreSelected.add(mutableSetOf())
+    genreSelected.add(mutableSetOf())
 
     do{
-        println("Catálogo de Géneros Literarios")
-        var i = 1; genre.forEach {  println("$i. $it"); i++ }
-        do {
-            print("Ingrese el número del género literio preferido o ingrese C para continuar: ")
-            val generInput = readLine()
-            var out= false
-            generInput?.forEach { if(!it.isLetter()) out = true; return@forEach }
-            if (out){
-                genreSelected.add(genre.elementAt(generInput?.toInt()!!-1))
-                println("   Has agregado ${genre.elementAt(generInput?.toInt()!!-1)}")
-            }
-        }while (out)
+        println("""
+            ------------------------------
+            |                             |
+            |  Hola, en esta plataforma   |
+            |  tenemos una gran variedad  |
+            |  de obras que te podrían    |
+            |  interesar, para mostrarte  |
+            |  recomendaricones por favor |
+            |  selecciona que tipo de     |
+            |  lecturas prefieres.        |
+            |                             |
+            |  ----------   -----------   |
+            |  | Libros |   | Revistas |  |
+            |  ----------   -----------   |
+            |        ------------         |
+            |        | Artículos |        |
+            |        ------------         |
+            |                             |
+            |                             |
+            |                    SKIP->   |
+            |                             |
+            -------------------------------
+        """.trimIndent()
+        )
 
-        print("\nTus género seleccionados son ")
-        genreSelected.forEach { print(" $it, ")}
-        print("\nIngrese Y para continuar o cualquier tecla para agregar más géneros: "); val salir = readLine()!="Y"
+        var respuesta: String?
+        do{
+            respuesta = when(retornaRespuesta("¿Qué te gusta leer?\n 1.Libros\n 2.Revistas\n 3.Artículos \n \n 0.Skip \n" +
+                    "\n Nota: En caso de que sean más de uno ingresar los números juntos")){
+                "1" -> "1"
+                "2" -> "2"
+                "3" -> "3"
+                "0" -> "0"
+                "12" -> "12"
+                "123" -> "123"
+                "23" ->"23"
+                "13" ->"13"
+                else -> null
+            }
+        }while( respuesta==null )
+
+        respuesta.toCharArray().map {
+            when( it ){
+                '1' ->{
+                    println("""
+                            -------------------------------
+                            |  Constantemente estaremos   |
+                            |  agregando más libros.      |
+                            |                             |
+                            |  Los géneros disponible son |
+                            |                             |
+                            |   * Libros *                |
+                            |                             |
+                            |  1.Terror                   |
+                            |                             |
+                            |  2.Ciencia Ficción          |
+                            |                             |
+                            |  3.Romance                  |
+                            |                             |
+                            |  4.Historia                 |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                  Skip ->    |
+                            -------------------------------
+                        """.trimIndent())
+                    genreSelected = seleccionaLosGéneros(genreSelected,allGenres,0, arrayListOf(1,2,3,4,0))
+                }
+                '2' ->{
+                    println("""
+                            -------------------------------
+                            |  Constantemente estaremos   |
+                            |  agregando más revistas.    |
+                            |                             |
+                            |  Los géneros disponible son |
+                            |                             |
+                            |    * Revistas *             |
+                            |                             |
+                            | 1.Multidisciplina           |
+                            | 2.Artes y Humanidades       |
+                            | 3.Ciencias Sociales y       |
+                            |     Económicas              |
+                            | 4.Físico Matemáticas y      |
+                            |     Ciencias de la Tierra   |
+                            | 5.Medicina y Ciencias de la |
+                            |     Salud                   |
+                            | 6.Biología                  |
+                            | 7.Química                   |
+                            |                             |
+                            |                  Skip ->    |
+                            -------------------------------
+                        """.trimIndent())
+                    genreSelected = seleccionaLosGéneros(genreSelected,allGenres,1, arrayListOf(1,2,3,4,5,6,7,0))
+                }
+                '3' ->{
+                    println("""
+                            -------------------------------
+                            |  Constantemente estaremos   |
+                            |  agregando más artículos.   |
+                            |                             |
+                            |  Los géneros disponible son |
+                            |                             |
+                            |   * Artículos *             |
+                            |                             |
+                            |  1.Biologic                 |
+                            |                             |
+                            |  2.Medical                  |
+                            |                             |
+                            |  3.Science                  |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                  Skip ->    |
+                            -------------------------------
+                        """.trimIndent())
+                    genreSelected = seleccionaLosGéneros(genreSelected,allGenres,2, arrayListOf(1,2,3,0))
+                }
+            }
+        }
+
+        val salir = when(retornaRespuesta("Muchas gracias por seleccionar los géneros preferidos \n 0. Continuar \n 1. Regresar")){
+            "1" -> true
+            else -> false
+        }
     }while(salir)
-    user.preferredGenre = genreSelected
+    user?.preferredGenre = genreSelected
 }
 
+fun retornaRespuesta(mensaje:String):String{
+    //Esta función permite obtener una respuesta que no sea nula
+    var respuesta:String?
+    do { respuesta = JOptionPane.showInputDialog(mensaje)
+    }while (respuesta==null)
+    return respuesta
+}
+
+fun seleccionaLosGéneros(genreSelected: ArrayList<MutableSet<String>>,
+                         allGenres: ArrayList<MutableSet<String>>, tipo:Int,
+                         listaOpciones:ArrayList<Int>): ArrayList<MutableSet<String>> {
+    var respuesta: String
+    do{
+        respuesta = retornaRespuesta("Ingresa tus géneros preferidos \n" +
+                " 0.Skip \n" +
+                "\n Nota: En caso de que sean más de uno ingresar los números juntos en orden ")
+        var viable = false
+        respuesta?.forEach { char ->
+            listaOpciones.map { int ->
+                viable = char.toString().toInt() == int; if(viable) return@forEach
+            }
+        }
+    }while( viable==false )
+
+    if(respuesta!!.toInt() != 0){
+        respuesta!!.forEach {valor ->
+            genreSelected[tipo].add(allGenres[tipo].elementAt(valor.toString().toInt()-1))
+        }
+        return genreSelected
+    }else{
+        return genreSelected
+    }
+}
 
 
 

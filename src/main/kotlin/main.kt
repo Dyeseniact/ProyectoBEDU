@@ -17,10 +17,7 @@ import models.listMagazine
 
 fun main(args: Array<String>) {
 
+    createDB()
     start()
-    println(listUsr[1]!!.getName())
-            println(listBook[1]!!.title)
-            println(listMagazine[1]!!.title)
-            println(listArticle[1]!!.title)
 
 }

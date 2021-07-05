@@ -1,7 +1,4 @@
-import models.Book
-import models.User
-import models.listBook
-import kotlin.system.exitProcess
+import models.*
 
 fun menuUser(){
     println("""Selecciona una opción 
@@ -106,16 +103,114 @@ fun returnMenu(){
 }
 
 fun recommendByGenerd(user: User){
-    val genresPreferd = user.preferredGenre
-    val bookByGenresPreferd = mutableListOf<Book>()
-    listBook.forEach { val book = it
-        genresPreferd.forEach { if (book?.genre == it) bookByGenresPreferd.add(book); return@forEach }
-    }
+    val itOrg =if(user.preferredGenre[0].isNotEmpty()) 0 else if(user.preferredGenre[1].isNotEmpty()) 1 else 2
+    var it = itOrg
+    var tipo = ""
+    var lectura = mutableSetOf<ArrayList<String>>()
+    if(user.preferredGenre[0].isNotEmpty() || user.preferredGenre[1].isNotEmpty() || user.preferredGenre[2].isNotEmpty() ){
+        do {
+            val salir : Boolean ;
+            if (user.preferredGenre[it].isNotEmpty()){
+                when( it ){
+                    0-> { tipo = "Libros   "; lectura = recomiendaLiteratura(user,it) }
+                    1-> { tipo = "Revistas "; lectura = recomiendaLiteratura(user,it) }
+                    2-> { tipo = "Artículos"; lectura = recomiendaLiteratura(user,it) }
 
-    println()
-    println("Títulos que te podrían interesar.")
-    for( i in 0 until 5){
-        val libroAleatorio = bookByGenresPreferd[(0 until bookByGenresPreferd.size).random()]
-        println(" ${i+1}. ${libroAleatorio.title}, ${libroAleatorio.author} ")
+                }
+
+                println("""
+                            -------------------------------
+                            |                             |
+                            | ¿Estás buscando algo nuevo? |
+                            |                             |
+                            | Los títulos que te podrían  |
+                            | interesar son:              |
+                            |                             |
+                            |      ${tipo}              |
+                            |                             |
+                            |  1. ${cuentaLetrasYRecorta(lectura.elementAt(0)[0])}|
+                            |       ${cuentaLetrasYRecorta(lectura.elementAt(0)[1],22)}|
+                            |  2. ${cuentaLetrasYRecorta(lectura.elementAt(1)[0])}|
+                            |       ${cuentaLetrasYRecorta(lectura.elementAt(1)[1],22)}|
+                            |  3. ${cuentaLetrasYRecorta(lectura.elementAt(2)[0])}|
+                            |       ${cuentaLetrasYRecorta(lectura.elementAt(2)[1],22)}|
+                            |  4. ${cuentaLetrasYRecorta(lectura.elementAt(3)[0])}|
+                            |       ${cuentaLetrasYRecorta(lectura.elementAt(3)[1],22)}|
+                            |  5. ${cuentaLetrasYRecorta(lectura.elementAt(4)[0])}|
+                            |       ${cuentaLetrasYRecorta(lectura.elementAt(4)[1],22)}|
+                            |                  Skip ->    |
+                            -------------------------------
+                        """.trimIndent())
+
+                when(retornaRespuesta("\n 0. Regresar menú \n 1. Desplazarse izq")){
+                    "1" ->{
+                        if(it==2) it=itOrg else it++
+                        salir = false
+                    }
+                    else -> salir=true
+                }
+            }else{
+                if(it==2) it=itOrg else it++
+                salir=false
+            }
+        }while (!salir)
+    }else{
+        selectPreferredGenre(user)
+    }
+}
+
+fun cuentaLetrasYRecorta(frase:String, lengStop:Int=24): String {
+    if(frase.length>23){
+        return frase.substring(0,lengStop-3)+"..."
+    }
+    else {
+        var nuevaFrase:String = frase
+        do {
+            nuevaFrase += " "
+        }while (nuevaFrase.length<lengStop)
+        return nuevaFrase
+    }
+}
+
+fun recomiendaLiteratura( user: User, tipoDeLectura:Int) : MutableSet<ArrayList<String>> {
+    val genresPreferdBooks = user.preferredGenre.elementAt(tipoDeLectura)
+    when(tipoDeLectura){
+        0-> {
+            val bookByGenresPreferd = mutableListOf<Book>()
+            listBook.forEach { val book = it
+                genresPreferdBooks.forEach { if (book?.genre == it) bookByGenresPreferd.add(book); return@forEach }
+            }
+            val booksRecommend = mutableSetOf<ArrayList<String>>()
+            do{
+                val libroAleatorio = bookByGenresPreferd[(0 until bookByGenresPreferd.size).random()]
+                booksRecommend.add( arrayListOf(libroAleatorio.title,libroAleatorio.author))
+            }while(booksRecommend.size < 5)
+            return booksRecommend
+        }
+        1 -> {
+            val magazineByGenresPreferd = mutableListOf<Magazine>()
+            listMagazine.forEach { val magazine = it
+                genresPreferdBooks.forEach { if (magazine?.genre == it) magazineByGenresPreferd.add(magazine); return@forEach }
+            }
+            val magazineRecommend = mutableSetOf<ArrayList<String>>()
+            do{
+                val revistaAleatoria = magazineByGenresPreferd[(0 until magazineByGenresPreferd.size).random()]
+                magazineRecommend.add( arrayListOf(revistaAleatoria.title,revistaAleatoria.author))
+            }while(magazineRecommend.size < 5)
+            return magazineRecommend
+        }
+        2 ->{
+            val bookByGenresPreferd = mutableListOf<Article>()
+            listArticle.forEach { val article = it
+                genresPreferdBooks.forEach { if (article?.genre == it) bookByGenresPreferd.add(article); return@forEach }
+            }
+            val articlesRecommend = mutableSetOf<ArrayList<String>>()
+            do{
+                val articuloAleatorio = bookByGenresPreferd[(0 until bookByGenresPreferd.size).random()]
+                articlesRecommend.add( arrayListOf(articuloAleatorio.title, articuloAleatorio.author))
+            }while(articlesRecommend.size < 5)
+            return articlesRecommend
+        }
+        else -> return mutableSetOf<ArrayList<String>>()
     }
 }

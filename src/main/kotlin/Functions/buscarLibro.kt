@@ -5,9 +5,46 @@ import Class.NumberIdStock
 import menuUser
 import models.listBook
 import returnMenu
+import javax.swing.JColorChooser.showDialog
 import javax.swing.JOptionPane
 
 // Listados de funciones
+
+
+
+fun searchProduct(){
+
+    var findProduct = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
+            "Diga una opción.\n " +
+            "1. Buscar artículos\n" +
+            "2. Buscar libros\n" +
+            "3. Buscar Revistas\n")
+    when (findProduct) {
+        "1" -> {
+             searchArticle()
+        }
+        "2" -> {
+             searchBook()
+        }
+        "3" -> {
+             searchMagazine()
+        }
+        else -> {
+            //print("Por favor, seleccione un método de búsqueda correcto")
+            JOptionPane.showConfirmDialog(null,"Por favor, seleccione un método de búsqueda correcto")
+            searchBook()
+        }
+    }
+}
+
+
+fun searchArticle(){
+
+}
+
+fun searchMagazine(){
+
+}
 
 
 
@@ -50,15 +87,15 @@ fun buscarLibroTitulo(){
     for (i in 0 until listBook.size){
         if(busquedaTitulo == listBook[i]!!.title){
 
-            JOptionPane.showInputDialog(null, "El libro está disponible")
-            var buy = JOptionPane.showInputDialog("¿Que desea realizar con el libro? " +
+
+            val buy = JOptionPane.showInputDialog("El libro está disponible ¿Que desea realizar? " +
                     "Seleccione una opción.\n " +
                     "1. Comprar en físico\n" +
                     "2. Rentar \n" +
                     "3. Lectura Online\n")
             comprarLibro(buy)
         }else {
-         var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
+         val salir = JOptionPane.showInputDialog("El libro no se encuentró."+
                     "Seleccione una opción.\n " +
                     "1. Volver al Menú\n" +
                     "2. Realizar otra búsqueda\n")
@@ -77,7 +114,6 @@ fun buscarLibroTitulo(){
 
 
 }
-
 
 fun buscarLibroAutor(){
     // A redactar en función de las BD de Libros
@@ -112,6 +148,10 @@ fun buscarLibroAutor(){
             }
         }
     }
+
+
+
+
 
 
 // Aún por desarrollar

@@ -17,7 +17,7 @@ fun menuUser(){
             returnMenu()
         }
         "2" -> {
-            searchBook()
+            searchProduct()
             returnMenu()
         }
         "3" -> {
@@ -50,9 +50,9 @@ fun topFavoriteBook(){
     }
 }
 
-fun searchBook(){
+/*fun searchBook(){
     println("Esta sección esta en proceso...")
-}
+}*/
 
 fun seachBookGenre(){
     var listBookGenre = Array<String>(100){""}

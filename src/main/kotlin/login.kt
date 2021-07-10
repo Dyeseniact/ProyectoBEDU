@@ -1,15 +1,29 @@
 import db.*
 import models.*
 import javax.swing.JOptionPane
-
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 lateinit var userLogin: User
 
 fun createDB(){
+    GlobalScope.launch {
+        createDBAdmins()
+        createDBBooks()
+        createDBArticle()
+        createDBMagazine()
+        var timing =0
+        print("Se esta creando la base de datos, pero puede usar el programa normalmente")
+        while (timing<3){
+            print(".")
+            timing++
+            delay(2000)
+        }
+        println()
+        println("La base de datos ha sido creada")
+    }
     //Creamos la base de datos de todos los administradores
-    createDBAdmins()
-    createDBBooks()
-    createDBArticle()
-    createDBMagazine()
+
 
 }
 

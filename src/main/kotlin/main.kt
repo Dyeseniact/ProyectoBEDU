@@ -20,16 +20,7 @@ import kotlinx.coroutines.runBlocking
 */
 
 fun main(args: Array<String>) {
-    println("Inicio del programa")
     createDB()
     start()
-    GlobalScope.launch {
-        Thread.sleep(1000)
-        println("Delay de un segundo")
-    }
 
-    println("fin del programa")
-
-
-
-}
+  }

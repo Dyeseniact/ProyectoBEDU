@@ -14,21 +14,48 @@ fun createDB(){
 }
 
 fun start(){
-    println("-------Bienvenido a nuestro sistema-------")
-    println("Eres usuario registatrado? (Y)es or (N)o")
-    var isUser: String = readLine()!!
+    println("""
+                            -------------------------------
+                            |                             |
+                            |       -----------|          |
+                            |      |             |        |
+                            |      |               |      |
+                            |      |               |      |
+                            |      |             |        |
+                            |      |           |          |
+                            |      |             |        |
+                            |      |               |      |
+                            |      |                 |    |
+                            |      |                  |   |
+                            |      |                   |  |
+                            |      |                    | |
+                            |      |                   |  |
+                            |      |                  |   |
+                            |      |----------------|     |
+                            |                             |
+                            |       Iniciar sesión        |
+                            |        Crear usuario        |
+                            -------------------------------
+                        """.trimIndent())
+
+    val seleccion = JOptionPane.showOptionDialog(
+        null ,
+        "¿Es un usuario registrado?",
+        "Login",
+        JOptionPane.YES_NO_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null , arrayOf<Any>("Si", "No", "Salir"),  // null para YES, NO y CANCEL
+        null)
 
     // Verifico si el usuario está registrado o no
-    if(isUser == "Y" || isUser == "y"){
+    if(seleccion == 0){
 
         // Voy a verificar si las credenciasles están correctas
 
-        println("Por favor, Introduzca su correo")
-        var email = readLine()!!
+        var email = retornaRespuesta("Por favor, Introduzca su correo")
         email = verifyCorrectEmail(email)
 
-        println("Por favor, Introduzca su contraseña")
-        var password = readLine()!!
+        var password = retornaRespuesta("Por favor, Introduzca su contraseña")
         password = verifyCorrectPassword(password)
 
         //Verifica que sea un usuario registrado
@@ -39,25 +66,15 @@ fun start(){
             "admin" -> menuAdmin()
             "user" -> menuUser()
             else -> {
-                println("No estas registrado")
-                println("Cree su usuario siguiendo las instrucciones:)")
-                createUsr()
-                menuUser()
+                JOptionPane.showMessageDialog(null, "No estas registrado" )
+                createUserQuestion()
             }
         }
 
-    }else if (isUser == "N" || isUser == "n"){
-        println("¿Desea crear un usuario? (Y)es or (N)o)")
-        var addUser: String = readLine()!!
-        if(addUser == "Y" || addUser == "y"){
-            createUsr()
-            menuUser()
-
-        }else{
-            println("Lamentamos su negativa")
-        }
+    }else if (seleccion == 1){
+        createUserQuestion()
     }else {
-        println("Error, comience y lea correctamente")
+        JOptionPane.showMessageDialog(null, "Adios :(" )
     }
 
 }
@@ -84,8 +101,9 @@ fun verifyCorrectEmail(email:String): String {
             if (it == '@') { correctEmail = true }
         }
         if (!correctEmail) {
-            println("El correo no es correcto hace falta el @, ingresa nuevamente el correo.")
-            println("\nIngresa email nuevamente"); correo = readLine().toString()
+            JOptionPane.showMessageDialog(null,
+                "El correo no es correcto hace falta el @, ingresa nuevamente el correo." )
+            correo = retornaRespuesta("Ingresa email nuevamente")
         }
     } while (!correctEmail)
     return correo
@@ -97,27 +115,88 @@ fun verifyCorrectPassword(password:String):String{
     do{
         val correctPassword= pass?.length!! >= 8
         if(!correctPassword){
-            println("La contraseña al menos debe tener 8 caracteres, ingresa nuevamente la contraseña.")
-            println("\nIngrese tu contraseña"); pass = readLine().toString()
+            JOptionPane.showMessageDialog(null,
+                "La contraseña al menos debe tener 8 caracteres, ingresa nuevamente la contraseña." )
+            pass = retornaRespuesta("Ingrese tu contraseña")
         }
     }while(!correctPassword)
     return pass
+}
+
+fun createUserQuestion(){
+    val seleccion = JOptionPane.showOptionDialog(
+        null ,
+        "¿Desea crear un usuario?",
+        "Creando ususario",
+        JOptionPane.YES_NO_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null , arrayOf<Any>("Si", "No"),  // null para YES, NO y CANCEL
+        null)
+    if(seleccion == 0){
+        createUsr()
+        menuUser()
+    }else{
+        JOptionPane.showMessageDialog(null,
+            "Lamentamos su negativa")
+    }
 }
 
 fun createUsr(){
 
     //Crea un usuario nuevo
 
-    print("Escriba su nombre: ")
-    val name= readLine().toString()
-    print("Escriba su nombre de usuario: ")
-    val userName = readLine().toString()
-    print("Escriba su contraseña: ")
-    val password = verifyCorrectPassword(readLine()!!)
-    print("Escriba su email: ")
-    val email = verifyCorrectEmail(readLine()!!)
+    println("""
+                            -------------------------------
+                            |                             |
+                            |    Este es el primer paso   |
+                            |    para aprender más        |
+                            |                             |
+                            |    Favor de ingresar los    |
+                            |    siguientes datos.        |
+                            |                             |
+                            |    Nombre:______________    |
+                            |                             |
+                            |    Usuario:_____________    |
+                            |                             |
+                            |    Contraseña:__________    |
+                            |                             |
+                            |    Email:_______________    |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            -------------------------------
+                        """.trimIndent())
 
-    println("Bienvenido, ahora eres parte de nuestra comunidad")
+    val name= retornaRespuesta("Favor de ingresar su nombre")
+    val userName = retornaRespuesta("Favor de ingresar su user name")
+    val password = verifyCorrectPassword(retornaRespuesta("Favor de ingresar su contraseña"))
+    val email = verifyCorrectEmail(retornaRespuesta("Favor de ingresar su correo"))
+
+    println("""
+                            -------------------------------
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |     B i e n v e n i d o     |
+                            |                             |
+                            |                             |
+                            |     Ahora eres parte de     |
+                            |                             |
+                            |     nuestra comunidad       |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            -------------------------------
+                        """.trimIndent())
 
     listUsr[countUsers]=User(countUsers+1,name,userName,password,email)
 
@@ -269,8 +348,15 @@ fun selectPreferredGenre(user: User?=null){
             }
         }
 
-        val salir = when(retornaRespuesta("Muchas gracias por seleccionar los géneros preferidos \n 0. Continuar \n 1. Regresar")){
-            "1" -> true
+        val salir = when(JOptionPane.showOptionDialog(
+            null ,
+            "Muchas gracias por seleccionar los géneros preferidos",
+            "Mi lectura favorita",
+            JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null , arrayOf<Any>("Continuar", "Volver a seleccionar mis géneros"),  // null para YES, NO y CANCEL
+            null)){
+            1 -> true
             else -> false
         }
     }while(salir)

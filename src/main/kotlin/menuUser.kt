@@ -1,4 +1,5 @@
 import models.*
+import javax.swing.JOptionPane
 
 fun menuUser(){
     println("""Selecciona una opción 
@@ -23,7 +24,7 @@ fun menuUser(){
         "3" -> {
             //seachBookGenre()
             recommendByGenerd(userLogin)
-            returnMenu()
+            menuUser()
         }
         "4" -> {
             myBooksBought()
@@ -142,8 +143,15 @@ fun recommendByGenerd(user: User){
                             -------------------------------
                         """.trimIndent())
 
-                when(retornaRespuesta("\n 0. Regresar menú \n 1. Desplazarse izq")){
-                    "1" ->{
+                when(JOptionPane.showOptionDialog(
+                    null ,
+                    "Recomendaciones por género",
+                    "Recomendaciones por género",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null , arrayOf<Any>("Deslizar pantalla", "Regresar al menú"),  // null para YES, NO y CANCEL
+                    null)){
+                    0 ->{
                         if(it==2) it=itOrg else it++
                         salir = false
                     }

@@ -4,6 +4,10 @@ import db.listUsr
 import models.listArticle
 import models.listBook
 import models.listMagazine
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /*
     NOTA:
@@ -16,8 +20,16 @@ import models.listMagazine
 */
 
 fun main(args: Array<String>) {
-
+    println("Inicio del programa")
     createDB()
     start()
+    GlobalScope.launch {
+        Thread.sleep(1000)
+        println("Delay de un segundo")
+    }
+
+    println("fin del programa")
+
+
 
 }

@@ -1,13 +1,6 @@
-import models.User
-import db.createDBBooks
-import db.listUsr
-import models.listArticle
-import models.listBook
-import models.listMagazine
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import models.*
+import kotlin.concurrent.thread
 
 /*
     NOTA:
@@ -21,6 +14,8 @@ import kotlinx.coroutines.runBlocking
 
 fun main(args: Array<String>) {
     createDB()
-    start()
+   /* start()*/
+    Thread.sleep(5000)
+    println("${listBook[1]?.author}")
 
   }

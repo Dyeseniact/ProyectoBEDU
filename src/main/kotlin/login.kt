@@ -6,7 +6,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 lateinit var userLogin: User
 
-fun createDB(){
+fun createDB():String{
     GlobalScope.launch {
         createDBAdmins()
         createDBBooks()
@@ -22,9 +22,7 @@ fun createDB(){
         println()
         println("La base de datos ha sido creada")
     }
-    //Creamos la base de datos de todos los administradores
-
-
+    return ""
 }
 
 fun start(){

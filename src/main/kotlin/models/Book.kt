@@ -1,6 +1,6 @@
 package models
 
-import models.Interfaces.Information
+import Interfaces.Information
 
 class Book(
     public override val id: Int,
@@ -17,12 +17,14 @@ init {
 
 }
 
-    override fun infoTitleAutorPrice() {
+    override fun infoTitleAutorPrice():String {
         println("El titulo $title fue escrito por $author y tiene un precio de $price ${
-            if (discount <= 0) {
-            } else {"lo tenemos acualmente en descuento de $discount el precio final es ${price-(price*discount)}"}
+            if (discount > 0) {
+                println("lo tenemos acualmente en descuento de $discount el precio final es ${price-(price*discount)}")
+            }else{
+                println("")
+            }
         }")
+        return ""
     }
-
-
 }

@@ -11,26 +11,57 @@ fun menuUser(){
         |5. Cerrar Sesión
         
     """.trimMargin())
-    var answerMenu: String = readLine()!!
+
+    println("""
+                            -------------------------------
+                            |               Cerrar sesión |
+                            |                             |
+                            |   |\  /| |-- |\  | |  |     |
+                            |   | \/ | |__ | \ | |  |     |
+                            |   |    | |__ |  \| |__|     |
+                            |                             |
+                            |                             |
+                            |  F A V O R I T O S          |
+                            |                             |
+                            |  B U S C A R                |
+                            |                             |
+                            |  R E C O M E N D A C I Ó N  |
+                            |                             |
+                            |  M I S   C O M P R A S      |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            -------------------------------
+                        """.trimIndent())
+    var answerMenu = JOptionPane.showOptionDialog(
+        null ,
+        "¿Es un usuario registrado?",
+        "Login",
+        JOptionPane.YES_NO_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null , arrayOf<Any>("Favoritos", "Buscar", "Recomendaciones", "Mis compras", "Cerrar sesión"),  // null para YES, NO y CANCEL
+        null)
     when(answerMenu){
-        "1" -> {
+        0 -> {
             topFavoriteBook()
             returnMenu()
         }
-        "2" -> {
+        1 -> {
             searchProduct()
             returnMenu()
         }
-        "3" -> {
+        2 -> {
             //seachBookGenre()
             recommendByGenerd(userLogin)
             menuUser()
         }
-        "4" -> {
+        3 -> {
             myBooksBought()
             returnMenu()
         }
-        "5" -> {
+        4 -> {
             start()
         }
         else -> {

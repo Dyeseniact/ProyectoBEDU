@@ -1,5 +1,6 @@
 import db.*
 import models.*
+import java.lang.Exception
 import javax.swing.JOptionPane
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -174,7 +175,7 @@ fun createUsr(){
                             |                             |
                             |    Email:_______________    |
                             |                             |
-                            |                             |
+                            |    Número:______________    |
                             |                             |
                             |                             |
                             |                             |
@@ -185,6 +186,23 @@ fun createUsr(){
     val userName = retornaRespuesta("Favor de ingresar su user name")
     val password = verifyCorrectPassword(retornaRespuesta("Favor de ingresar su contraseña"))
     val email = verifyCorrectEmail(retornaRespuesta("Favor de ingresar su correo"))
+
+    do{
+        var out: Boolean=false
+        val num = retornaRespuesta("Favor de ingresar número")
+        try {
+            val numero = num.toLong()
+            if(numero<1000000000){
+                JOptionPane.showMessageDialog(null,
+                    "El número es menor a 10 dígitos" )
+            }else{
+                out=true
+            }
+        }catch (e: Exception){
+            JOptionPane.showMessageDialog(null,
+                "El número no es correcto, verifique" )
+        }
+    }while(!out)
 
     println("""
                             -------------------------------

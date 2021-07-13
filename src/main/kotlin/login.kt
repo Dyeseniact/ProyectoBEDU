@@ -93,11 +93,11 @@ fun start(){
 }
 fun login(email: String, password: String): String{
     for(i in 0..99){
-        if(listUsr[i]?.getTipoCuenta() == "admin" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
+        if(listUsr[i]?.getTypeAccount() == "admin" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
             userLogin = listUsr[i]!!
             return "admin"
         }else{
-            if(listUsr[i]?.getTipoCuenta() == "user" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
+            if(listUsr[i]?.getTypeAccount() == "user" && listUsr[i]?.getEmail() == email && listUsr[i]?.getPassword() == password){
                 userLogin = listUsr[i]!!
                 return "user"
             }

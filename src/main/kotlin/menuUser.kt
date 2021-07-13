@@ -83,13 +83,13 @@ fun topFavorite(){
     println("Las revistas favoritas son:")
     for(i in 0..99){
         if(listMagazine[i]?.favorite == true){
-            println("Libro: ${listMagazine[i]?.title}, Autor: ${listMagazine[i]?.author}")
+            println("Revistas: ${listMagazine[i]?.title}, Autor: ${listMagazine[i]?.author}")
         }
     }
-    println("Los articulos favoritos son:")
+    println("Los artículos favoritos son:")
     for(i in 0..99){
         if(listArticle[i]?.favorite == true){
-            println("Libro: ${listArticle[i]?.title}, Autor: ${listArticle[i]?.author}")
+            println("Artículos: ${listArticle[i]?.title}, Autor: ${listArticle[i]?.author}")
         }
     }
 }

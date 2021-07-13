@@ -94,10 +94,6 @@ fun topFavorite(){
     }
 }
 
-/*fun searchBook(){
-    println("Esta sección esta en proceso...")
-}*/
-
 fun seachBookGenre(){
     var listBookGenre = Array<String>(100){""}
     var countGenre: Int = 0

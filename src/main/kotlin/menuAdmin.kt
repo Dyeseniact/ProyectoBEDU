@@ -1,5 +1,10 @@
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import models.Book
 import models.countBook
+import models.listArticle
 import models.listBook
 
 fun menuAdmin(){
@@ -7,7 +12,9 @@ fun menuAdmin(){
         |Menu Administrador:
         |1. Agregar un libro
         |2. Ver libros
-        |3. Cerrar Sesión
+        |3. Ver Revistas
+        |4. Ver Articulos
+        |5. Cerrar Sesión
         
     """.trimMargin())
     var answerMenu: String = readLine()!!
@@ -22,6 +29,14 @@ fun menuAdmin(){
             returnMenuAdmin()
         }
         "3" -> {
+            viewMagazine()
+            returnMenuAdmin()
+        }
+        "4" -> {
+            viewArticle()
+            returnMenuAdmin()
+        }
+        "5" -> {
             start()
         }
         else -> {
@@ -35,11 +50,41 @@ fun menuAdmin(){
 //Funciones de Administrador
 
 fun viewBooks(){
+    println("Cargando Libros")
+    Thread.sleep(2000)
+    for (i in 0..10){
+        print(".")
+        Thread.sleep(1000)
+    }
+    println("... listo")
     for(i in 0..39){
-        println("${listBook[i]?.id} - ${listBook[i]?.title}" )
+        println("${listBook[i]?.id} - ${listBook[i]?.title} - ${listBook[i]?.stock}" )
+        Thread.sleep(500)
     }
 }
 
+fun viewMagazine(){
+
+}
+
+fun viewArticle() = runBlocking{
+    launch {
+        delay(2000L)
+        for (i in 0..10){
+            print(".")
+            Thread.sleep(500)
+        }
+        println("... listo")
+    }
+    launch {
+        delay(3000L)
+        for(i in 0..17){
+            println("${listArticle[i]?.id} - ${listArticle[i]?.title} - ${listArticle[i]?.stock}" )
+            Thread.sleep(500)
+        }
+    }
+    println("Cargando Articulos")
+}
 fun addBook(){
     println("Ingresa el titulo del libro")
     var title: String = readLine()!!

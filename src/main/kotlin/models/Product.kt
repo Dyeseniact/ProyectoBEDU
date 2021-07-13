@@ -13,4 +13,6 @@ abstract class Product {
     fun getPrice(id:Int):Double{
             return price-(price*discount)
         }
+
+
 }

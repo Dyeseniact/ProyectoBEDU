@@ -1,6 +1,6 @@
 package models
 
-class Magazine (
+data class Magazine (
     override val id: Int,
     override var title: String,
     override var author: String,
@@ -11,8 +11,20 @@ class Magazine (
     override var discount: Int=0,
     private var Month:String,
     private var Year:Int
-):Product() {
-    fun getMonth():String=Month
-    fun getYear():Int=Year
-
+):Product(){
+    init {
+        countMagazine++
+    }
+    fun getMonth():String{
+        return Month
+    }
+    fun setMonth(Month: String){
+        this.Month=Month
+    }
+    fun getYear():Int{
+        return Year
+    }
+    fun setYear(Year: Int){
+        this.Year=Year
+    }
 }

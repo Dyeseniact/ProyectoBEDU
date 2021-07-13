@@ -1,5 +1,7 @@
-import models.User
-import db.createDBBooks
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import models.*
+import kotlin.concurrent.thread
 
 /*
     NOTA:
@@ -12,7 +14,7 @@ import db.createDBBooks
 */
 
 fun main(args: Array<String>) {
-
+    createDB()
     start()
 
-}
+  }

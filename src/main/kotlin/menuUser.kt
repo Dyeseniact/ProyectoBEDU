@@ -7,7 +7,7 @@ fun menuUser(){
         |1. Ver favoritos
         |2. Buscar libro
         |3. Mis recomendaciones
-        |4. Mis libros comprados
+        |4. Mis compras
         |5. Cerrar Sesión
         
     """.trimMargin())
@@ -37,15 +37,15 @@ fun menuUser(){
                         """.trimIndent())
     var answerMenu = JOptionPane.showOptionDialog(
         null ,
-        "¿Es un usuario registrado?",
-        "Login",
+        "Selecciona una opción",
+        "Ventana principal",
         JOptionPane.YES_NO_CANCEL_OPTION,
         JOptionPane.QUESTION_MESSAGE,
         null , arrayOf<Any>("Favoritos", "Buscar", "Recomendaciones", "Mis compras", "Cerrar sesión"),  // null para YES, NO y CANCEL
         null)
     when(answerMenu){
         0 -> {
-            topFavoriteBook()
+            topFavorite()
             returnMenu()
         }
         1 -> {
@@ -53,12 +53,11 @@ fun menuUser(){
             returnMenu()
         }
         2 -> {
-            //seachBookGenre()
             recommendByGenerd(userLogin)
             menuUser()
         }
         3 -> {
-            myBooksBought()
+            myProductsBought()
             returnMenu()
         }
         4 -> {
@@ -73,54 +72,46 @@ fun menuUser(){
 
 //Funciones de Usuarios
 
-fun topFavoriteBook(){
+fun topFavorite(){
     println("Los libros favoritos son:")
     for(i in 0..99){
         if(listBook[i]?.favorite == true){
             println("Libro: ${listBook[i]?.title}, Autor: ${listBook[i]?.author}")
         }
     }
-}
-
-/*fun searchBook(){
-    println("Esta sección esta en proceso...")
-}*/
-
-fun seachBookGenre(){
-    var listBookGenre = Array<String>(100){""}
-    var countGenre: Int = 0
-    print("""
-            Escribe el número del genero que te interese:
-            1. Terror
-            2. Romance
-            3. SCI-FI
-            4. Historia
-        
-        """.trimIndent())
-    var opcion: Int = readLine()!!.toInt()
-    var genre:String=""
-    when (opcion){
-        1->genre="Terror"
-        2->genre="Romance"
-        3->genre="Ciencia Ficción"
-        4->genre="Historia"
-    }
+    println("Las revistas favoritas son:")
     for(i in 0..99){
-        if(genre.equals(listBook[i]?.genre)){
-            listBookGenre[countGenre]= listBook[i]!!.title
-            countGenre++
+        if(listMagazine[i]?.favorite == true){
+            println("Revistas: ${listMagazine[i]?.title}, Autor: ${listMagazine[i]?.author}")
         }
     }
-    println("Te recomendamos estos libro del genero $genre: ")
+    println("Los artículos favoritos son:")
     for(i in 0..99){
-        if(listBookGenre[i].isNotEmpty()){
-            println("Título: ${listBookGenre[i]}")
+        if(listArticle[i]?.favorite == true){
+            println("Artículos: ${listArticle[i]?.title}, Autor: ${listArticle[i]?.author}")
         }
     }
 }
 
-fun myBooksBought(){
-    println("Esta sección esta en proceso")
+
+fun myProductsBought(){
+
+    var book = 0
+    var magazine = 0
+    var article = 0
+    println("Mis compras:")
+
+    for(i in 0..2){
+        book = (0..39).random()
+        magazine = (0..29).random()
+        article = (0..17).random()
+
+        println("* Libro:  ${listBook[book]?.title} ")
+        println("* Revista: ${listMagazine[magazine]?.title}")
+        println("* Articulo: ${listArticle[article]?.title}")
+    }
+
+
 }
 
 fun returnMenu(){
@@ -137,16 +128,16 @@ fun returnMenu(){
 fun recommendByGenerd(user: User){
     val itOrg =if(user.preferredGenre[0].isNotEmpty()) 0 else if(user.preferredGenre[1].isNotEmpty()) 1 else 2
     var it = itOrg
-    var tipo = ""
-    var lectura = mutableSetOf<ArrayList<String>>()
+    var type = ""
+    var literature = mutableSetOf<ArrayList<String>>()
     if(user.preferredGenre[0].isNotEmpty() || user.preferredGenre[1].isNotEmpty() || user.preferredGenre[2].isNotEmpty() ){
         do {
-            val salir : Boolean ;
+            val getOutLoop : Boolean ;
             if (user.preferredGenre[it].isNotEmpty()){
                 when( it ){
-                    0-> { tipo = "Libros   "; lectura = recomiendaLiteratura(user,it) }
-                    1-> { tipo = "Revistas "; lectura = recomiendaLiteratura(user,it) }
-                    2-> { tipo = "Artículos"; lectura = recomiendaLiteratura(user,it) }
+                    0-> { type = "Libros   "; literature = literatureRecommend(user,it) }
+                    1-> { type = "Revistas "; literature = literatureRecommend(user,it) }
+                    2-> { type = "Artículos"; literature = literatureRecommend(user,it) }
 
                 }
 
@@ -158,18 +149,18 @@ fun recommendByGenerd(user: User){
                             | Los títulos que te podrían  |
                             | interesar son:              |
                             |                             |
-                            |      ${tipo}              |
+                            |      ${type}              |
                             |                             |
-                            |  1. ${cuentaLetrasYRecorta(lectura.elementAt(0)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(0)[1],22)}|
-                            |  2. ${cuentaLetrasYRecorta(lectura.elementAt(1)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(1)[1],22)}|
-                            |  3. ${cuentaLetrasYRecorta(lectura.elementAt(2)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(2)[1],22)}|
-                            |  4. ${cuentaLetrasYRecorta(lectura.elementAt(3)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(3)[1],22)}|
-                            |  5. ${cuentaLetrasYRecorta(lectura.elementAt(4)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(4)[1],22)}|
+                            |  1. ${countLetterAndRemakeString(literature.elementAt(0)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(0)[1],22)}|
+                            |  2. ${countLetterAndRemakeString(literature.elementAt(1)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(1)[1],22)}|
+                            |  3. ${countLetterAndRemakeString(literature.elementAt(2)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(2)[1],22)}|
+                            |  4. ${countLetterAndRemakeString(literature.elementAt(3)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(3)[1],22)}|
+                            |  5. ${countLetterAndRemakeString(literature.elementAt(4)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(4)[1],22)}|
                             |                  Skip ->    |
                             -------------------------------
                         """.trimIndent())
@@ -184,36 +175,36 @@ fun recommendByGenerd(user: User){
                     null)){
                     0 ->{
                         if(it==2) it=itOrg else it++
-                        salir = false
+                        getOutLoop = false
                     }
-                    else -> salir=true
+                    else -> getOutLoop=true
                 }
             }else{
                 if(it==2) it=itOrg else it++
-                salir=false
+                getOutLoop=false
             }
-        }while (!salir)
+        }while (!getOutLoop)
     }else{
         selectPreferredGenre(user)
     }
 }
 
-fun cuentaLetrasYRecorta(frase:String, lengStop:Int=24): String {
-    if(frase.length>23){
-        return frase.substring(0,lengStop-3)+"..."
+fun countLetterAndRemakeString(sentence:String, lengStop:Int=24): String {
+    if(sentence.length>23){
+        return sentence.substring(0,lengStop-3)+"..."
     }
     else {
-        var nuevaFrase:String = frase
+        var newSentence:String = sentence
         do {
-            nuevaFrase += " "
-        }while (nuevaFrase.length<lengStop)
-        return nuevaFrase
+            newSentence += " "
+        }while (newSentence.length<lengStop)
+        return newSentence
     }
 }
 
-fun recomiendaLiteratura( user: User, tipoDeLectura:Int) : MutableSet<ArrayList<String>> {
-    val genresPreferdBooks = user.preferredGenre.elementAt(tipoDeLectura)
-    when(tipoDeLectura){
+fun literatureRecommend(user: User, literatureType:Int) : MutableSet<ArrayList<String>> {
+    val genresPreferdBooks = user.preferredGenre.elementAt(literatureType)
+    when(literatureType){
         0-> {
             val bookByGenresPreferd = mutableListOf<Book>()
             listBook.forEach { val book = it
@@ -253,3 +244,4 @@ fun recomiendaLiteratura( user: User, tipoDeLectura:Int) : MutableSet<ArrayList<
         else -> return mutableSetOf<ArrayList<String>>()
     }
 }
+

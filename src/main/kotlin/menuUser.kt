@@ -45,7 +45,7 @@ fun menuUser(){
         null)
     when(answerMenu){
         0 -> {
-            topFavoriteBook()
+            topFavorite()
             returnMenu()
         }
         1 -> {
@@ -73,11 +73,23 @@ fun menuUser(){
 
 //Funciones de Usuarios
 
-fun topFavoriteBook(){
+fun topFavorite(){
     println("Los libros favoritos son:")
     for(i in 0..99){
         if(listBook[i]?.favorite == true){
             println("Libro: ${listBook[i]?.title}, Autor: ${listBook[i]?.author}")
+        }
+    }
+    println("Las revistas favoritas son:")
+    for(i in 0..99){
+        if(listMagazine[i]?.favorite == true){
+            println("Libro: ${listMagazine[i]?.title}, Autor: ${listMagazine[i]?.author}")
+        }
+    }
+    println("Los articulos favoritos son:")
+    for(i in 0..99){
+        if(listArticle[i]?.favorite == true){
+            println("Libro: ${listArticle[i]?.title}, Autor: ${listArticle[i]?.author}")
         }
     }
 }

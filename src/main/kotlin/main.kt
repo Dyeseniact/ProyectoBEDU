@@ -14,7 +14,7 @@ import kotlin.concurrent.thread
 
 fun main(args: Array<String>) {
     createDB()
-    //start()
+    start()
     Thread.sleep(6100)
     println("${listBook[1]?.infoTitleAutorPrice()}")
 

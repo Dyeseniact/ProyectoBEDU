@@ -154,7 +154,14 @@ fun searchBookTitle() {
                     "2. Rentar \n" +
                     "3. Lectura Online\n"
         ).toInt()
-        comprarLibro(buy, busquedaTitulo)
+        comprar(buy, busquedaTitulo)
+
+
+
+
+
+
+
     } else{
         var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
                 "Seleccione una opción.\n " +
@@ -305,7 +312,7 @@ fun searchPaperTitle(){
         if (buy.equals(2)){
             buy=3
         }
-        comprarLibro(buy, paperTitulo)
+        comprar(buy, paperTitulo)
     } else{
         var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
                 "Seleccione una opción.\n " +
@@ -520,7 +527,7 @@ fun searchMagazineTitle(){
         if (buy.equals(2)){
             buy=3
         }
-        comprarLibro(buy, magazineTitulo)
+        comprar(buy, magazineTitulo)
     } else{
         var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
                 "Seleccione una opción.\n " +
@@ -641,12 +648,12 @@ fun searchMagazineGenre(){
 
 
 ///////////////////////////////////////////////////////////////////////
-fun comprarLibro(opt: Int, title: String){
+/*fun comprarLibro(opt: Int, title: String) {
     when (opt) {
         1 -> {
-            comprar()
+            comprar(opt, title)
         }
-        2-> {
+        2 -> {
             alquilar()
         }
         3 -> {
@@ -657,42 +664,61 @@ fun comprarLibro(opt: Int, title: String){
             searchBook()
         }
     }
+}*/
 
 
 
+
+fun comprar(opt: Int, title: String){
+       println("Proceda a pagar su compra")
+
+    var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
+    var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
+
+
+    var percentageInit: Int = 10
+    print("Se está realizando la compra:\n")
+    for (i in 0..10){
+        var percentage = i*percentageInit
+        println("${percentage}%")
+        if (percentage == 100){
+            print(" El pago ha sido realizado correctamente\n")
+        }
+    }
 
 }
-
-
-
-
-fun comprar(){
-    /*   println("Proceda a pagar su compra")
-       val buyBook = launch{
-           var percentaje = 0
-
-           while (percentaje<100){
-               delay( 100)
-               percentaje+=10
-           }
-
-       }
-   */
-
-    // Llamar la función carrito: Agregar al carrito, proceder al pago.
-}
-
-
 
 fun alquilar(){
     println("Proceda a pagar el alquiler de su libro")
+    var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
+    var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
-    // Llamar la función carrito: Agregar al carrito, proceder al pago.
+
+    var percentageInit: Int = 10
+    print("Se está realizando el pago de su alquiler:\n")
+    for (i in 0..10){
+        var percentage = i*percentageInit
+        println("${percentage}%")
+        if (percentage == 100){
+            print(" El pago ha sido realizado correctamente\n")
+        }
+    }
 }
 
 fun leerOnline(){
     println("Proceda a pagar su libro de lectura")
+    var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
+    var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
-    // Llamar la función carrito: Agregar al carrito, proceder al pago.
+
+    var percentageInit: Int = 10
+    print("Se está realizando el pago de su lectura:\n")
+    for (i in 0..10){
+        var percentage = i*percentageInit
+        println("${percentage}%")
+        if (percentage == 100){
+            print(" El pago ha sido realizado correctamente\n")
+        }
+    }
 }
 

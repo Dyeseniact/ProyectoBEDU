@@ -3,15 +3,16 @@ package models
 import Interfaces.Information
 
 class Book(
-    public override val id: Int,
-    public override var title: String,
-    public override var author: String,
-    public override var genre: String,
-    public override var price: Double,
-    public override var stock: Int,
-    public override var favorite: Boolean=false,
-    public override var discount: Int=0
+    override val id: Int,
+    override var title: String,
+    override var author: String,
+    override var genre: String,
+    override var price: Double,
+    override var stock: Int,
+    override var favorite: Boolean=false,
+    override var discount: Int=0
 ):Product(), Information {
+
 init {
     countBook++
 

@@ -1,4 +1,5 @@
 import models.*
+import javax.swing.JOptionPane
 
 fun menuUser(){
     println("""Selecciona una opción 
@@ -10,26 +11,57 @@ fun menuUser(){
         |5. Cerrar Sesión
         
     """.trimMargin())
-    var answerMenu: String = readLine()!!
+
+    println("""
+                            -------------------------------
+                            |               Cerrar sesión |
+                            |                             |
+                            |   |\  /| |-- |\  | |  |     |
+                            |   | \/ | |__ | \ | |  |     |
+                            |   |    | |__ |  \| |__|     |
+                            |                             |
+                            |                             |
+                            |  F A V O R I T O S          |
+                            |                             |
+                            |  B U S C A R                |
+                            |                             |
+                            |  R E C O M E N D A C I Ó N  |
+                            |                             |
+                            |  M I S   C O M P R A S      |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            |                             |
+                            -------------------------------
+                        """.trimIndent())
+    var answerMenu = JOptionPane.showOptionDialog(
+        null ,
+        "¿Es un usuario registrado?",
+        "Login",
+        JOptionPane.YES_NO_CANCEL_OPTION,
+        JOptionPane.QUESTION_MESSAGE,
+        null , arrayOf<Any>("Favoritos", "Buscar", "Recomendaciones", "Mis compras", "Cerrar sesión"),  // null para YES, NO y CANCEL
+        null)
     when(answerMenu){
-        "1" -> {
+        0 -> {
             topFavoriteBook()
             returnMenu()
         }
-        "2" -> {
-            searchBook()
+        1 -> {
+            searchProduct()
             returnMenu()
         }
-        "3" -> {
+        2 -> {
             //seachBookGenre()
             recommendByGenerd(userLogin)
-            returnMenu()
+            menuUser()
         }
-        "4" -> {
+        3 -> {
             myBooksBought()
             returnMenu()
         }
-        "5" -> {
+        4 -> {
             start()
         }
         else -> {
@@ -50,18 +82,9 @@ fun topFavoriteBook(){
     }
 }
 
-fun topFavoriteMagazine(){
-    println("Las revistas favoritas son:")
-    for(i in 0..99){
-        if(listMagazine[i]?.favorite == true){
-            println("Libro: ${listMagazine[i]?.title}, Autor: ${listMagazine[i]?.author}")
-        }
-    }
-}
-
-fun searchBook(){
+/*fun searchBook(){
     println("Esta sección esta en proceso...")
-}
+}*/
 
 fun seachBookGenre(){
     var listBookGenre = Array<String>(100){""}
@@ -151,8 +174,15 @@ fun recommendByGenerd(user: User){
                             -------------------------------
                         """.trimIndent())
 
-                when(retornaRespuesta("\n 0. Regresar menú \n 1. Desplazarse izq")){
-                    "1" ->{
+                when(JOptionPane.showOptionDialog(
+                    null ,
+                    "Recomendaciones por género",
+                    "Recomendaciones por género",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null , arrayOf<Any>("Deslizar pantalla", "Regresar al menú"),  // null para YES, NO y CANCEL
+                    null)){
+                    0 ->{
                         if(it==2) it=itOrg else it++
                         salir = false
                     }

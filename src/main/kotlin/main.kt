@@ -1,9 +1,6 @@
-import models.User
-import db.createDBBooks
-import db.listUsr
-import models.listArticle
-import models.listBook
-import models.listMagazine
+import kotlinx.coroutines.delay
+import models.*
+import kotlin.concurrent.thread
 
 /*
     NOTA:
@@ -16,8 +13,10 @@ import models.listMagazine
 */
 
 fun main(args: Array<String>) {
-
     createDB()
-    start()
+    //start()
+    Thread.sleep(6100)
+    println("${listBook[1]?.infoTitleAutorPrice()}")
 
-}
+
+  }

@@ -7,7 +7,7 @@ fun menuUser(){
         |1. Ver favoritos
         |2. Buscar libro
         |3. Mis recomendaciones
-        |4. Mis libros comprados
+        |4. Mis compras
         |5. Cerrar Sesión
         
     """.trimMargin())
@@ -53,12 +53,11 @@ fun menuUser(){
             returnMenu()
         }
         2 -> {
-            //seachBookGenre()
             recommendByGenerd(userLogin)
             menuUser()
         }
         3 -> {
-            myBooksBought()
+            myProductsBought()
             returnMenu()
         }
         4 -> {
@@ -94,41 +93,25 @@ fun topFavorite(){
     }
 }
 
-fun seachBookGenre(){
-    var listBookGenre = Array<String>(100){""}
-    var countGenre: Int = 0
-    print("""
-            Escribe el número del genero que te interese:
-            1. Terror
-            2. Romance
-            3. SCI-FI
-            4. Historia
-        
-        """.trimIndent())
-    var opcion: Int = readLine()!!.toInt()
-    var genre:String=""
-    when (opcion){
-        1->genre="Terror"
-        2->genre="Romance"
-        3->genre="Ciencia Ficción"
-        4->genre="Historia"
-    }
-    for(i in 0..99){
-        if(genre.equals(listBook[i]?.genre)){
-            listBookGenre[countGenre]= listBook[i]!!.title
-            countGenre++
-        }
-    }
-    println("Te recomendamos estos libro del genero $genre: ")
-    for(i in 0..99){
-        if(listBookGenre[i].isNotEmpty()){
-            println("Título: ${listBookGenre[i]}")
-        }
-    }
-}
 
-fun myBooksBought(){
-    println("Esta sección esta en proceso")
+fun myProductsBought(){
+
+    var book = 0
+    var magazine = 0
+    var article = 0
+    println("Mis compras:")
+
+    for(i in 0..2){
+        book = (0..39).random()
+        magazine = (0..29).random()
+        article = (0..17).random()
+
+        println("* Libro:  ${listBook[book]?.title} ")
+        println("* Revista: ${listMagazine[magazine]?.title}")
+        println("* Articulo: ${listArticle[article]?.title}")
+    }
+
+
 }
 
 fun returnMenu(){
@@ -261,3 +244,4 @@ fun literatureRecommend(user: User, literatureType:Int) : MutableSet<ArrayList<S
         else -> return mutableSetOf<ArrayList<String>>()
     }
 }
+

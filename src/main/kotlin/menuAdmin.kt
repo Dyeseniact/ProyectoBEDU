@@ -11,7 +11,8 @@ fun menuAdmin(){
         |2. Ver libros
         |3. Ver Revistas
         |4. Ver Articulos
-        |5. Cerrar Sesión
+        |5. Buscar libros por generos
+        |6. Cerrar Sesión
         
     """.trimMargin())
     var answerMenu: String = readLine()!!
@@ -34,6 +35,10 @@ fun menuAdmin(){
             returnMenuAdmin()
         }
         "5" -> {
+            seachBookGenre()
+            returnMenuAdmin()
+        }
+        "6" -> {
             start()
         }
         else -> {
@@ -118,6 +123,39 @@ fun addBook(){
     listBook[countBook]= Book(countBook +1,title,author,genre,price,stock)
     countBook++
     println("Libro registrado con exito")
+}
+
+fun seachBookGenre(){
+    var listBookGenre = Array<String>(100){""}
+    var countGenre: Int = 0
+    print("""
+            Escribe el número del genero que te interese:
+            1. Terror
+            2. Romance
+            3. SCI-FI
+            4. Historia
+        
+        """.trimIndent())
+    var opcion: Int = readLine()!!.toInt()
+    var genre:String=""
+    when (opcion){
+        1->genre="Terror"
+        2->genre="Romance"
+        3->genre="Ciencia Ficción"
+        4->genre="Historia"
+    }
+    for(i in 0..99){
+        if(genre.equals(listBook[i]?.genre)){
+            listBookGenre[countGenre]= listBook[i]!!.title
+            countGenre++
+        }
+    }
+    println("Se tienen estos libros de estos generos $genre: ")
+    for(i in 0..99){
+        if(listBookGenre[i].isNotEmpty()){
+            println("Título: ${listBookGenre[i]}")
+        }
+    }
 }
 
 fun returnMenuAdmin(){

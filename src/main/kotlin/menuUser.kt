@@ -37,8 +37,8 @@ fun menuUser(){
                         """.trimIndent())
     var answerMenu = JOptionPane.showOptionDialog(
         null ,
-        "¿Es un usuario registrado?",
-        "Login",
+        "Selecciona una opción",
+        "Ventana principal",
         JOptionPane.YES_NO_CANCEL_OPTION,
         JOptionPane.QUESTION_MESSAGE,
         null , arrayOf<Any>("Favoritos", "Buscar", "Recomendaciones", "Mis compras", "Cerrar sesión"),  // null para YES, NO y CANCEL
@@ -149,16 +149,16 @@ fun returnMenu(){
 fun recommendByGenerd(user: User){
     val itOrg =if(user.preferredGenre[0].isNotEmpty()) 0 else if(user.preferredGenre[1].isNotEmpty()) 1 else 2
     var it = itOrg
-    var tipo = ""
-    var lectura = mutableSetOf<ArrayList<String>>()
+    var type = ""
+    var literature = mutableSetOf<ArrayList<String>>()
     if(user.preferredGenre[0].isNotEmpty() || user.preferredGenre[1].isNotEmpty() || user.preferredGenre[2].isNotEmpty() ){
         do {
-            val salir : Boolean ;
+            val getOutLoop : Boolean ;
             if (user.preferredGenre[it].isNotEmpty()){
                 when( it ){
-                    0-> { tipo = "Libros   "; lectura = recomiendaLiteratura(user,it) }
-                    1-> { tipo = "Revistas "; lectura = recomiendaLiteratura(user,it) }
-                    2-> { tipo = "Artículos"; lectura = recomiendaLiteratura(user,it) }
+                    0-> { type = "Libros   "; literature = literatureRecommend(user,it) }
+                    1-> { type = "Revistas "; literature = literatureRecommend(user,it) }
+                    2-> { type = "Artículos"; literature = literatureRecommend(user,it) }
 
                 }
 
@@ -170,18 +170,18 @@ fun recommendByGenerd(user: User){
                             | Los títulos que te podrían  |
                             | interesar son:              |
                             |                             |
-                            |      ${tipo}              |
+                            |      ${type}              |
                             |                             |
-                            |  1. ${cuentaLetrasYRecorta(lectura.elementAt(0)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(0)[1],22)}|
-                            |  2. ${cuentaLetrasYRecorta(lectura.elementAt(1)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(1)[1],22)}|
-                            |  3. ${cuentaLetrasYRecorta(lectura.elementAt(2)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(2)[1],22)}|
-                            |  4. ${cuentaLetrasYRecorta(lectura.elementAt(3)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(3)[1],22)}|
-                            |  5. ${cuentaLetrasYRecorta(lectura.elementAt(4)[0])}|
-                            |       ${cuentaLetrasYRecorta(lectura.elementAt(4)[1],22)}|
+                            |  1. ${countLetterAndRemakeString(literature.elementAt(0)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(0)[1],22)}|
+                            |  2. ${countLetterAndRemakeString(literature.elementAt(1)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(1)[1],22)}|
+                            |  3. ${countLetterAndRemakeString(literature.elementAt(2)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(2)[1],22)}|
+                            |  4. ${countLetterAndRemakeString(literature.elementAt(3)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(3)[1],22)}|
+                            |  5. ${countLetterAndRemakeString(literature.elementAt(4)[0])}|
+                            |       ${countLetterAndRemakeString(literature.elementAt(4)[1],22)}|
                             |                  Skip ->    |
                             -------------------------------
                         """.trimIndent())
@@ -196,36 +196,36 @@ fun recommendByGenerd(user: User){
                     null)){
                     0 ->{
                         if(it==2) it=itOrg else it++
-                        salir = false
+                        getOutLoop = false
                     }
-                    else -> salir=true
+                    else -> getOutLoop=true
                 }
             }else{
                 if(it==2) it=itOrg else it++
-                salir=false
+                getOutLoop=false
             }
-        }while (!salir)
+        }while (!getOutLoop)
     }else{
         selectPreferredGenre(user)
     }
 }
 
-fun cuentaLetrasYRecorta(frase:String, lengStop:Int=24): String {
-    if(frase.length>23){
-        return frase.substring(0,lengStop-3)+"..."
+fun countLetterAndRemakeString(sentence:String, lengStop:Int=24): String {
+    if(sentence.length>23){
+        return sentence.substring(0,lengStop-3)+"..."
     }
     else {
-        var nuevaFrase:String = frase
+        var newSentence:String = sentence
         do {
-            nuevaFrase += " "
-        }while (nuevaFrase.length<lengStop)
-        return nuevaFrase
+            newSentence += " "
+        }while (newSentence.length<lengStop)
+        return newSentence
     }
 }
 
-fun recomiendaLiteratura( user: User, tipoDeLectura:Int) : MutableSet<ArrayList<String>> {
-    val genresPreferdBooks = user.preferredGenre.elementAt(tipoDeLectura)
-    when(tipoDeLectura){
+fun literatureRecommend(user: User, literatureType:Int) : MutableSet<ArrayList<String>> {
+    val genresPreferdBooks = user.preferredGenre.elementAt(literatureType)
+    when(literatureType){
         0-> {
             val bookByGenresPreferd = mutableListOf<Book>()
             listBook.forEach { val book = it

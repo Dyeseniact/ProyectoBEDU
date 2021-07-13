@@ -1,3 +1,5 @@
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import models.listArticle
 import models.listBook
 import models.listMagazine
@@ -445,7 +447,7 @@ fun searchPaperYear(){
 
             meanYear = JOptionPane.showInputDialog("Introduce el año requerido:").toInt()
             for (i in 0..99) {
-                if (meanYear == listArticle[i]?.yearPublication) {
+                if (meanYear == listArticle[i]?.getYearPublication()) {
                     listPaperYear[countAuthor]= listArticle[i]!!.title
                     countAuthor++
                 }
@@ -460,8 +462,8 @@ fun searchPaperYear(){
             mayorYear = JOptionPane.showInputDialog("Introduce el mayor año:").toInt()
 
             for (i in 0..99) {
-                if (menorYear <= listArticle[i]?.yearPublication!!) {
-                    if (mayorYear>=listArticle[i]?.yearPublication!!){
+                if (menorYear <= listArticle[i]?.getYearPublication()!!) {
+                    if (mayorYear>=listArticle[i]?.getYearPublication()!!){
                         listPaperYear[countAuthor]= listArticle[i]!!.title
                         countAuthor++
                     }
@@ -495,9 +497,86 @@ fun searchPaperYear(){
 
 ////////////////////////////////////////////////////////////
 fun searchMagazineTitle(){
+    // A redactar en función de las BD de Libros
+    val listMagazineTitle = Array<String>(listMagazine.size) { "" }
+    var countTitle: Int = 0
+    val magazineTitulo: String = JOptionPane.showInputDialog("Introduce el nombre de la revista:").toString()
+    //Mensaje de prueba
+    println("Búscando el Título $magazineTitulo")
+    // Aún por desarrollar
+
+    for (i in 0..99) {
+        if (magazineTitulo.equals(listMagazine[i]?.title, ignoreCase = true)) {
+            listMagazineTitle[countTitle]= listMagazine[i]!!.title
+            countTitle++
+        }
+
+    }
+
+
+    if (countTitle>0){
+        var buy = JOptionPane.showInputDialog(
+            "La revista está disponible ¿Que desea realizar? " +
+                    "Seleccione una opción.\n " +
+                    "1. Comprar en físico\n" +
+                    "2. Lectura Online \n"
+        ).toInt()
+
+        if (buy.equals(2)){
+            buy=3
+        }
+        comprarLibro(buy, magazineTitulo)
+    } else{
+        var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
+                "Seleccione una opción.\n " +
+                "1. Volver al Menú\n" +
+                "2. Realizar otra búsqueda\n")
+        when (salir) {
+            "1" -> {
+                menuUser()
+            }
+            "2" -> {
+                searchBook()
+            }
+            else -> {
+                println("Introdujo opción erronéa, esté más atento")
+                returnMenu()
+            }
+        }
+    }
 }
 
 fun searchMagazineAutor(){
+    var listMagazineAuthor = Array<String>(listMagazine.size) { "" }
+    var countAuthor: Int = 0
+    var busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
+
+    //Mensaje de prueba
+    println("Búscando revista del author $busquedaAuthor")
+
+
+
+    for (i in 0..99) {
+        if (busquedaAuthor.equals(listMagazine[i]?.author, ignoreCase = true)) {
+            listMagazineAuthor[countAuthor]= listMagazine[i]!!.title
+            countAuthor++
+        }
+
+    }
+
+    if (countAuthor>0){
+        println("Las revistas disponibles del autor $busquedaAuthor son:\n:")
+        for(i in 0..99){
+            if(listMagazineAuthor[i].isNotEmpty()){
+                println("Título: ${listMagazineAuthor[i]}")
+            }
+        }
+
+        searchBookTitle()
+    }else{
+        println("El autor $busquedaAuthor no tiene revistas disponibles")}
+
+
 }
 
 fun searchMagazineGenre(){
@@ -593,11 +672,22 @@ fun comprarLibro(opt: Int, title: String){
 
 
 fun comprar(){
-    println("Proceda a pagar su compra")
+    /*   println("Proceda a pagar su compra")
+       val buyBook = launch{
+           var percentaje = 0
 
+           while (percentaje<100){
+               delay( 100)
+               percentaje+=10
+           }
+
+       }
+   */
 
     // Llamar la función carrito: Agregar al carrito, proceder al pago.
 }
+
+
 
 fun alquilar(){
     println("Proceda a pagar el alquiler de su libro")

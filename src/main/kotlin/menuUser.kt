@@ -43,6 +43,7 @@ fun menuUser(){
         JOptionPane.QUESTION_MESSAGE,
         null , arrayOf<Any>("Favoritos", "Buscar", "Recomendaciones", "Mis compras", "Cerrar sesión"),  // null para YES, NO y CANCEL
         null)
+
     when(answerMenu){
         0 -> {
             topFavorite()
@@ -61,7 +62,8 @@ fun menuUser(){
             returnMenu()
         }
         4 -> {
-            start()
+            JOptionPane.showMessageDialog(null, "Te esperamos pronto de regreos :D" )
+            runProgram = false
         }
         else -> {
             println("Opcion incorrecta intente de nuevo.")

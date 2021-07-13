@@ -369,34 +369,25 @@ fun searchPaperGenre(){
     var genre: String? = ""
 
     var opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
-            "1. Artes y Humanidades\n" +
-            "2. Ciencias Sociales y Económicas\n" +
-            "3. Físico Matemáticas y Ciencias de la Tierra\n" +
-            "4. Medicina y Ciencias de la Salud\n" +
-            "5. Multidisciplina\n" +
-            "6. Otro").toInt()
+            "1. Biologic\n" +
+            "2. Medical\n" +
+            "3. Science\n" +
+            "4. Otro").toInt()
 
 
     when (opcion){
         1->{
-            genre="Artes y Humanidades"
+            genre="Biologic"
         }
         2->{
-            genre="Ciencias Sociales y Económicas"
+            genre="Medical"
         }
         3->{
-            genre="Físico Matemáticas y Ciencias de la Tierra"
+            genre="Science"
         }
         4->{
-            genre="Medicina y Ciencias de la Salud"
-        }
-        5->{
-            genre="Multidisciplina"
-        }
-        6->{
             genre=JOptionPane.showInputDialog("Introduce otro genero").toString()
         }
-
 
     }
 
@@ -407,24 +398,28 @@ fun searchPaperGenre(){
         }
     }
 
-    if (countGenre>0){
+    when {
+        countGenre>0 -> {
 
 
-        println("Te recomendamos estos libro del genero $genre: ")
-        for(i in 0..listPaperGenre.size){
-            if(listPaperGenre[i].isNotEmpty()){
-                println("Título: ${listPaperGenre[i]} ")
+            println("Te recomendamos estos libros del genero $genre: ")
+            for(i in 0..99){
+                if(listPaperGenre[i].isNotEmpty()){
+                    println("${listPaperGenre[i]} ")
+                }
             }
-        }
-        searchPaperTitle()
 
-    }else{
-        println("Lamentablemente no contamos con artículos del género\n" +
-                "$genre")
+            searchPaperTitle()
+
+        }
+        else -> {
+            println("Lamentablemente no contamos con artículos del género\n" +
+                    "$genre")
+        }
     }
 
 
-
+returnMenu()
 
 }
 

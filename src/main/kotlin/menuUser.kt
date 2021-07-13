@@ -64,6 +64,7 @@ fun menuUser(){
         4 -> {
             JOptionPane.showMessageDialog(null, "Te esperamos pronto de regreos :D" )
             runProgram = false
+
         }
         else -> {
             println("Opcion incorrecta intente de nuevo.")

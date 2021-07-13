@@ -1,5 +1,3 @@
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import models.listArticle
 import models.listBook
 import models.listMagazine
@@ -37,7 +35,7 @@ fun searchProduct(){
 
 
 fun searchArticle(){
-    var findBook = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
+    val findBook = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
             "Diga una opción.\n " +
             "1. Buscar por Título\n" +
             "2. Buscar por autores\n" +
@@ -133,6 +131,10 @@ fun searchBookTitle() {
     var listBookTitle = Array<String>(listBook.size) { "" }
     var countTitle: Int = 0
     var busquedaTitulo: String = JOptionPane.showInputDialog("Introduce el Título deseado").toString()
+    var titleProduct: String = ""
+    var priceProduct: Double = 0.0
+    var stockProduct: Int = 0
+
     //Mensaje de prueba
     println("Búscando el Título $busquedaTitulo")
     // Aún por desarrollar
@@ -140,6 +142,9 @@ fun searchBookTitle() {
     for (i in 0..99) {
         if (busquedaTitulo.equals(listBook[i]?.title, ignoreCase = true)) {
             listBookTitle[countTitle]= listBook[i]!!.title
+            titleProduct = listBook[i]!!.title
+            priceProduct = listBook[i]!!.price
+            stockProduct = listBook[i]!!.stock
             countTitle++
         }
 
@@ -148,17 +153,24 @@ fun searchBookTitle() {
 
     if (countTitle>0){
         var buy = JOptionPane.showInputDialog(
-            "El libro está disponible ¿Que desea realizar? " +
-                    "Seleccione una opción.\n " +
+            "Hay $stockProduct libros disponibles: $titleProduct, con un costo $priceProduct Mxn \n " +
+                    "¿Que desea realizar? \n " +
                     "1. Comprar en físico\n" +
                     "2. Rentar \n" +
                     "3. Lectura Online\n"
         ).toInt()
-        comprar(buy, busquedaTitulo)
-
-
-
-
+        if(buy == 1){
+            print("El costo de la compra es: $priceProduct \n")
+            buyProduct(priceProduct, titleProduct)
+        }else if(buy == 2){
+            priceProduct = priceProduct*0.5
+            print("El costo de la renta mensual es: $priceProduct \n")
+            rentProduct(priceProduct, titleProduct)
+        }else{
+            priceProduct = priceProduct*0.2
+            print("El costo de la lectura online es: $priceProduct \n")
+            readProduct(priceProduct, titleProduct)
+        }
 
 
 
@@ -287,14 +299,21 @@ fun searchPaperTitle(){
     // A redactar en función de las BD de Libros
     val listPaperTitle = Array<String>(listArticle.size) { "" }
     var countTitle: Int = 0
-    val paperTitulo: String = JOptionPane.showInputDialog("Introduce el nombre del artículo:").toString()
+    val paperTitle: String = JOptionPane.showInputDialog("Introduce el nombre del artículo:").toString()
+    var titleProduct: String = ""
+    var priceProduct: Double = 0.0
+    var stockProduct: Int = 0
+
     //Mensaje de prueba
-    println("Búscando el Título $paperTitulo")
+    println("Búscando el Título $paperTitle")
     // Aún por desarrollar
 
     for (i in 0..99) {
-        if (paperTitulo.equals(listArticle[i]?.title, ignoreCase = true)) {
+        if (paperTitle.equals(listArticle[i]?.title, ignoreCase = true)) {
             listPaperTitle[countTitle]= listArticle[i]!!.title
+            titleProduct = listArticle[i]!!.title
+            priceProduct = listArticle[i]!!.price
+            stockProduct = listArticle[i]!!.stock
             countTitle++
         }
 
@@ -303,16 +322,31 @@ fun searchPaperTitle(){
 
     if (countTitle>0){
         var buy = JOptionPane.showInputDialog(
-            "El libro está disponible ¿Que desea realizar? " +
-                    "Seleccione una opción.\n " +
+            "Existen $stockProduct ejemplares del artículo:\n" +
+                    " $titleProduct" +
+                    " con un costo $priceProduct Mxn\n" +
+                    "¿Que desea realizar? \n " +
                     "1. Comprar en físico\n" +
-                    "2. Lectura Online \n"
+                    "2. Rentar \n" +
+                    "3. Lectura Online\n"
         ).toInt()
 
         if (buy.equals(2)){
             buy=3
         }
-        comprar(buy, paperTitulo)
+        if(buy == 1){
+            print("El costo de la compra es: $priceProduct \n")
+            buyProduct(priceProduct, titleProduct)
+        }else if(buy == 2){
+            priceProduct = priceProduct*0.5
+            print("El costo de la renta mensual es: $priceProduct \n")
+            rentProduct(priceProduct, titleProduct)
+        }else{
+            priceProduct = priceProduct*0.2
+            print("El costo de la lectura online es: $priceProduct \n")
+            readProduct(priceProduct, titleProduct)
+        }
+
     } else{
         var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
                 "Seleccione una opción.\n " +
@@ -498,11 +532,16 @@ fun searchPaperYear(){
 }
 
 ////////////////////////////////////////////////////////////
+// Busqueda por Revistas
 fun searchMagazineTitle(){
     // A redactar en función de las BD de Libros
     val listMagazineTitle = Array<String>(listMagazine.size) { "" }
     var countTitle: Int = 0
     val magazineTitulo: String = JOptionPane.showInputDialog("Introduce el nombre de la revista:").toString()
+    var titleProduct: String = ""
+    var priceProduct: Double = 0.0
+    var stockProduct: Int = 0
+
     //Mensaje de prueba
     println("Búscando el Título $magazineTitulo")
     // Aún por desarrollar
@@ -510,6 +549,9 @@ fun searchMagazineTitle(){
     for (i in 0..99) {
         if (magazineTitulo.equals(listMagazine[i]?.title, ignoreCase = true)) {
             listMagazineTitle[countTitle]= listMagazine[i]!!.title
+            titleProduct = listMagazine[i]!!.title
+            priceProduct = listMagazine[i]!!.price
+            stockProduct = listMagazine[i]!!.stock
             countTitle++
         }
 
@@ -518,16 +560,34 @@ fun searchMagazineTitle(){
 
     if (countTitle>0){
         var buy = JOptionPane.showInputDialog(
-            "La revista está disponible ¿Que desea realizar? " +
-                    "Seleccione una opción.\n " +
+            "Existen $stockProduct ejemplares de la revista:\n" +
+                    "$titleProduct\n " +
+                    "¿Que desea realizar? \n " +
                     "1. Comprar en físico\n" +
-                    "2. Lectura Online \n"
+                    "2. Rentar \n" +
+                    "3. Lectura Online\n"
         ).toInt()
 
         if (buy.equals(2)){
             buy=3
         }
-        comprar(buy, magazineTitulo)
+
+        when (buy) {
+            1 -> {
+                print("El costo de la compra es: $priceProduct \n")
+                buyProduct(priceProduct, titleProduct)
+            }
+            2 -> {
+                priceProduct = priceProduct*0.5
+                print("El costo de la renta mensual es: $priceProduct \n")
+                rentProduct(priceProduct, titleProduct)
+            }
+            else -> {
+                priceProduct = priceProduct*0.2
+                print("El costo de la lectura online es: $priceProduct \n")
+                readProduct(priceProduct, titleProduct)
+            }
+        }
     } else{
         var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
                 "Seleccione una opción.\n " +
@@ -669,15 +729,18 @@ fun searchMagazineGenre(){
 
 
 
-fun comprar(opt: Int, title: String){
+fun buyProduct(opt: Double, title: String){
        println("Proceda a pagar su compra")
 
     var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
     var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
 
-    var percentageInit: Int = 10
-    print("Se está realizando la compra:\n")
+    val percentageInit: Int = 10
+    print("Se está realizando la compra del artículo \n" +
+            " $title \n " +
+            "con un costo de $opt Mxn\n")
+
     for (i in 0..10){
         var percentage = i*percentageInit
         println("${percentage}%")
@@ -688,14 +751,17 @@ fun comprar(opt: Int, title: String){
 
 }
 
-fun alquilar(){
+fun rentProduct(opt: Double, title: String){
     println("Proceda a pagar el alquiler de su libro")
     var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
     var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
 
     var percentageInit: Int = 10
-    print("Se está realizando el pago de su alquiler:\n")
+    print("Se está realizando el pago del alquiler del artículo:\n" +
+            "$title \n " +
+            "con un costo de $opt Mxn\n")
+
     for (i in 0..10){
         var percentage = i*percentageInit
         println("${percentage}%")
@@ -705,14 +771,16 @@ fun alquilar(){
     }
 }
 
-fun leerOnline(){
+fun readProduct(opt: Double, title: String){
     println("Proceda a pagar su libro de lectura")
     var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
     var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
 
     var percentageInit: Int = 10
-    print("Se está realizando el pago de su lectura:\n")
+    print("Se está realizando el pago de su lectura online del artículo:\n" +
+            "$title \n" +
+            "con costo de $opt Mxn")
     for (i in 0..10){
         var percentage = i*percentageInit
         println("${percentage}%")

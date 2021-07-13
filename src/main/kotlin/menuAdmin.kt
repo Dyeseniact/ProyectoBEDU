@@ -2,10 +2,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import models.Book
-import models.countBook
-import models.listArticle
-import models.listBook
+import models.*
 
 fun menuAdmin(){
     println("""Selecciona una opción 
@@ -51,20 +48,20 @@ fun menuAdmin(){
 
 fun viewBooks(){
     println("Cargando Libros")
+
     Thread.sleep(2000)
+
     for (i in 0..10){
         print(".")
         Thread.sleep(1000)
     }
+
     println("... listo")
+
     for(i in 0..39){
         println("${listBook[i]?.id} - ${listBook[i]?.title} - ${listBook[i]?.stock}" )
         Thread.sleep(500)
     }
-}
-
-fun viewMagazine(){
-
 }
 
 fun viewArticle() = runBlocking{
@@ -76,6 +73,7 @@ fun viewArticle() = runBlocking{
         }
         println("... listo")
     }
+
     launch {
         delay(3000L)
         for(i in 0..17){
@@ -83,8 +81,29 @@ fun viewArticle() = runBlocking{
             Thread.sleep(500)
         }
     }
+
     println("Cargando Articulos")
 }
+
+fun viewMagazine(){
+    println("Cargando Revistas")
+
+    Thread.sleep(2000)
+
+    for (i in 0..10){
+        print(".")
+        Thread.sleep(1000)
+    }
+
+    println("... listo")
+
+    for(i in 0..29){
+        println("${listMagazine[i]?.id} - ${listMagazine[i]?.title} - ${listMagazine[i]?.stock}" )
+        Thread.sleep(500)
+    }
+
+}
+
 fun addBook(){
     println("Ingresa el titulo del libro")
     var title: String = readLine()!!

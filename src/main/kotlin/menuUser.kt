@@ -50,6 +50,15 @@ fun topFavoriteBook(){
     }
 }
 
+fun topFavoriteMagazine(){
+    println("Las revistas favoritas son:")
+    for(i in 0..99){
+        if(listMagazine[i]?.favorite == true){
+            println("Libro: ${listMagazine[i]?.title}, Autor: ${listMagazine[i]?.author}")
+        }
+    }
+}
+
 fun searchBook(){
     println("Esta sección esta en proceso...")
 }

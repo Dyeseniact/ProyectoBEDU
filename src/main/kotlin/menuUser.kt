@@ -1,16 +1,34 @@
 import models.*
 import javax.swing.JOptionPane
 
+val presentarse = {name:String ->
+    """
+                            -------------------------------
+                            |                             |
+                            |                             |
+                            |         ___          ____   |
+                            | |   |  |   |  |     |    |  |
+                            | |---|  |   |  |     |----|  |
+                            | |   |  |___|  |___  |    |  |
+                            |                             |
+                            |                             |
+                            |    B i e v e n i d o        |
+                            |                             |
+                            |    ${countLetterAndRemakeString(name,24)}|
+                            |                             |
+                            |    H e m o s                |
+                            |    A g r e g a d o          |
+                            |    M u c h o s              |
+                            |    L i b r o s              |
+                            |    P a r a   t í            |
+                            |                             |
+                            |                             |
+                            -------------------------------
+                        """.trimIndent() }
+
 fun menuUser(){
-    println("""Selecciona una opción 
-        |Menu
-        |1. Ver favoritos
-        |2. Buscar libro
-        |3. Mis recomendaciones
-        |4. Mis compras
-        |5. Cerrar Sesión
-        
-    """.trimMargin())
+    println(presentarse(userLogin.getName()))
+    Thread.sleep(1500)
 
     println("""
                             -------------------------------

@@ -1,7 +1,7 @@
 package models
 
 abstract class Product {
-    abstract val id:Int
+    abstract var id:Int
     abstract var title:String
     abstract var author:String
     abstract var genre:String

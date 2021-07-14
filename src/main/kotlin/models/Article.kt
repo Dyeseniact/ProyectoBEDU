@@ -1,7 +1,7 @@
 package models
-
+//Esta clase se dejo de usar debido al reto final de la sesion 6 en donde se pide cambiar una clase a java
 data class Article(
-    override val id: Int,
+    override var id: Int,
     override var title: String,
     override var author: String,
     override var genre: String,

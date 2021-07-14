@@ -85,8 +85,8 @@ fun start(){
 
             //Verifica si es un usuario o un administrador
             when(loginAnswer){
-                "admin" -> { menuAdmin(); runProgram = false; email ="" }
-                "user" -> { menuUser(); runProgram = false; email ="" }
+                "admin" -> { selection = 100; menuAdmin(); email ="" }
+                "user" -> { selection = 100; menuUser();  email ="" }
                 "userWrongPassword" -> {
                     val selection = JOptionPane.showOptionDialog(
                         null ,

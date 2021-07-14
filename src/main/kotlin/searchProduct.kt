@@ -67,7 +67,7 @@ fun searchArticle(){
 }
 
 fun searchMagazine(){
-    var findMagazine = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
+    val findMagazine = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
             "Diga una opción.\n " +
             "1. Buscar por Título\n" +
             "2. Buscar por revista\n" +
@@ -97,7 +97,7 @@ fun searchMagazine(){
 
 fun searchBook(){
 
-    var findBook = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
+    val findBook = JOptionPane.showInputDialog("¿Por qué método desea realizar la búsqueda? " +
             "Diga una opción.\n " +
             "1. Buscar por Título\n" +
             "2. Buscar por autores\n" +
@@ -128,9 +128,9 @@ fun searchBook(){
 
 fun searchBookTitle() {
     // A redactar en función de las BD de Libros
-    var listBookTitle = Array<String>(listBook.size) { "" }
+    val listBookTitle = Array<String>(listBook.size) { "" }
     var countTitle: Int = 0
-    var busquedaTitulo: String = JOptionPane.showInputDialog("Introduce el Título deseado").toString()
+    val busquedaTitulo: String = JOptionPane.showInputDialog("Introduce el Título deseado").toString()
     var titleProduct: String = ""
     var priceProduct: Double = 0.0
     var stockProduct: Int = 0
@@ -175,7 +175,7 @@ fun searchBookTitle() {
 
 
     } else{
-        var salir = JOptionPane.showInputDialog("El libro no se encuentró."+
+        val salir = JOptionPane.showInputDialog("El libro no se encuentró."+
                 "Seleccione una opción.\n " +
                 "1. Volver al Menú\n" +
                 "2. Realizar otra búsqueda\n")
@@ -198,9 +198,9 @@ fun searchBookTitle() {
 fun searchBookAutor(){
     // A redactar en función de las BD de Libros
     //println("Introduce el Nombre del autor:")
-    var listBookAuthor = Array<String>(listBook.size) { "" }
+    val listBookAuthor = Array<String>(listBook.size) { "" }
     var countAuthor: Int = 0
-    var busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
+    val busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
 
     //Mensaje de prueba
     println("Búscando Títulos del author $busquedaAuthor")
@@ -232,7 +232,7 @@ fun searchBookAutor(){
 }
 
 fun searchBookGenreJ(){
-    var listBookGenre = Array<String>(100){""}
+    val listBookGenre = Array<String>(100){""}
     var countGenre: Int = 0
     var genre: String? = ""
     print("""
@@ -243,7 +243,7 @@ fun searchBookGenreJ(){
             4. Historia
         
         """.trimIndent())
-    var opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
+    val opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
             "1. Terror\n" +
             "2. Romance\n" +
             "3. Ciencia Ficción\n" +
@@ -348,7 +348,7 @@ fun searchPaperTitle(){
         }
 
     } else{
-        var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
+        val salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
                 "Seleccione una opción.\n " +
                 "1. Volver al Menú\n" +
                 "2. Realizar otra búsqueda\n")
@@ -371,9 +371,9 @@ fun searchPaperTitle(){
 fun searchPaperAutor(){
     // A redactar en función de las BD de Libros
     //println("Introduce el Nombre del autor:")
-    var listPaperAuthor = Array<String>(listArticle.size) { "" }
+    val listPaperAuthor = Array<String>(listArticle.size) { "" }
     var countAuthor: Int = 0
-    var busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
+    val busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
 
     //Mensaje de prueba
     println("Búscando Títulos del author $busquedaAuthor")
@@ -405,11 +405,11 @@ fun searchPaperAutor(){
 }
 
 fun searchPaperGenre(){
-    var listPaperGenre = Array<String>(listArticle.size){""}
+    val listPaperGenre = Array<String>(listArticle.size){""}
     var countGenre: Int = 0
     var genre: String? = ""
 
-    var opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
+    val opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
             "1. Biologic\n" +
             "2. Medical\n" +
             "3. Science\n" +
@@ -589,7 +589,7 @@ fun searchMagazineTitle(){
             }
         }
     } else{
-        var salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
+        val salir = JOptionPane.showInputDialog("El artículo no se encuentró."+
                 "Seleccione una opción.\n " +
                 "1. Volver al Menú\n" +
                 "2. Realizar otra búsqueda\n")
@@ -609,9 +609,9 @@ fun searchMagazineTitle(){
 }
 
 fun searchMagazineAutor(){
-    var listMagazineAuthor = Array<String>(listMagazine.size) { "" }
+    val listMagazineAuthor = Array<String>(listMagazine.size) { "" }
     var countAuthor: Int = 0
-    var busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
+    val busquedaAuthor: String = JOptionPane.showInputDialog("Introduce el Nombre del autor:")
 
     //Mensaje de prueba
     println("Búscando revista del author $busquedaAuthor")
@@ -642,11 +642,11 @@ fun searchMagazineAutor(){
 }
 
 fun searchMagazineGenre(){
-    var listMagazineGenre = Array<String>(listMagazine.size){""}
+    val listMagazineGenre = Array<String>(listMagazine.size){""}
     var countGenre: Int = 0
     var genre: String? = ""
 
-    var opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
+    val opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
             "1. Artes y Humanidades\n" +
             "2. Ciencias Sociales y Económicas\n" +
             "3. Físico Matemáticas y Ciencias de la Tierra\n" +
@@ -742,7 +742,7 @@ fun buyProduct(opt: Double, title: String){
             "con un costo de $opt Mxn\n")
 
     for (i in 0..10){
-        var percentage = i*percentageInit
+        val percentage = i*percentageInit
         println("${percentage}%")
         if (percentage == 100){
             print(" El pago ha sido realizado correctamente\n")
@@ -757,7 +757,7 @@ fun rentProduct(opt: Double, title: String){
     var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
 
-    var percentageInit: Int = 10
+    val percentageInit: Int = 10
     print("Se está realizando el pago del alquiler del artículo:\n" +
             "$title \n " +
             "con un costo de $opt Mxn\n")
@@ -777,12 +777,12 @@ fun readProduct(opt: Double, title: String){
     var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
 
 
-    var percentageInit: Int = 10
+    val percentageInit: Int = 10
     print("Se está realizando el pago de su lectura online del artículo:\n" +
             "$title \n" +
-            "con costo de $opt Mxn")
+            "con costo de $opt Mxn \n")
     for (i in 0..10){
-        var percentage = i*percentageInit
+        val percentage = i*percentageInit
         println("${percentage}%")
         if (percentage == 100){
             print(" El pago ha sido realizado correctamente\n")

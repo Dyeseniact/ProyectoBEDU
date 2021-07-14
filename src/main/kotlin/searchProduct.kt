@@ -27,7 +27,7 @@ fun searchProduct(){
         }
         else -> {
             //print("Por favor, seleccione un método de búsqueda correcto")
-            JOptionPane.showConfirmDialog(null,"Por favor, seleccione un método de búsqueda correcto")
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione un método de búsqueda correcto")
             searchBook()
         }
     }
@@ -59,7 +59,7 @@ fun searchArticle(){
             returnMenu()
         }
         else -> {
-            print("Por favor, seleccione un método de búsqueda correcto")
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione un método de correcto")
             searchBook()
         }
     }
@@ -87,7 +87,7 @@ fun searchMagazine(){
             returnMenu()
         }
         else -> {
-            print("Por favor, seleccione un método de búsqueda correcto")
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione un método de búsqueda correcto")
             searchMagazine()
         }
     }
@@ -117,7 +117,7 @@ fun searchBook(){
             returnMenu()
         }
         else -> {
-            print("Por favor, seleccione un método de búsqueda correcto")
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione un método de búsqueda correcto")
             searchBook()
         }
     }
@@ -187,7 +187,7 @@ fun searchBookTitle() {
                 searchBook()
             }
             else -> {
-                println("Introdujo opción erronéa, esté más atento")
+                JOptionPane.showMessageDialog(null,"Por favor, seleccione un método de búsqueda correcto")
                 returnMenu()
             }
         }
@@ -235,14 +235,14 @@ fun searchBookGenreJ(){
     val listBookGenre = Array<String>(100){""}
     var countGenre: Int = 0
     var genre: String? = ""
-    print("""
-            Escribe el número del genero que te interese:
-            1. Terror
-            2. Romance
-            3. SCI-FI
-            4. Historia
-        
-        """.trimIndent())
+    /* print("""
+             Escribe el número del genero que te interese:
+             1. Terror
+             2. Romance
+             3. SCI-FI
+             4. Historia
+
+         """.trimIndent())*/
     val opcion = JOptionPane.showInputDialog("Introduzca el género deseado:\n" +
             "1. Terror\n" +
             "2. Romance\n" +
@@ -264,9 +264,11 @@ fun searchBookGenreJ(){
             genre="Historia"
         }
         else->{
+            JOptionPane.showMessageDialog(null,"Por favor, seleccione un método de búsqueda correcto")
             searchBookGenreJ()
         }
     }
+
     for(i in 0..99){
         if(genre.equals(listBook[i]?.genre)){
             listBookGenre[countGenre]= listBook[i]!!.title
@@ -460,7 +462,7 @@ fun searchPaperGenre(){
     }
 
 
-returnMenu()
+    returnMenu()
 
 }
 
@@ -674,7 +676,10 @@ fun searchMagazineGenre(){
         6->{
             genre=JOptionPane.showInputDialog("Introduce otro genero").toString()
         }
-
+        else -> {
+            print("Selecciona una opción correcta \n")
+            searchMagazineGenre()
+        }
 
     }
 
@@ -730,7 +735,7 @@ fun searchMagazineGenre(){
 
 
 fun buyProduct(opt: Double, title: String){
-       println("Proceda a pagar su compra")
+    println("Proceda a pagar su compra")
 
     var tarjeta: Double = JOptionPane.showInputDialog("Introduce el número de tarjeta").toDouble()
     var clave: String = JOptionPane.showInputDialog("Introduce el código de la tarjeta")
@@ -789,4 +794,5 @@ fun readProduct(opt: Double, title: String){
         }
     }
 }
+
 

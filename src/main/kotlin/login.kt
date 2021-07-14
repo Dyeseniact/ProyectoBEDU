@@ -446,7 +446,9 @@ fun genredSelect(genreSelected: ArrayList<MutableSet<String>>,
         var viable = false
         response?.forEach { char ->
             optionslist.map { int ->
-                viable = char.toString().toInt() == int; if(viable) return@forEach
+                try {viable = char.toString().toInt() == int}catch (e:Exception){
+                    println("Mensaje de consola de error $e")
+                }; if(viable) return@forEach
             }
         }
     }while( viable==false )

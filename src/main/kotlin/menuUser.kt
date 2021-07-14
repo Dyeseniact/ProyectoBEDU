@@ -62,7 +62,7 @@ fun menuUser(){
             returnMenu()
         }
         4 -> {
-            JOptionPane.showMessageDialog(null, "Te esperamos pronto de regreos :D" )
+            JOptionPane.showMessageDialog(null, "Te esperamos pronto de regreso :D" )
             selection = 100;
         }
         else -> {
